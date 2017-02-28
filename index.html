@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Family Tree</title>
+
+  <!-- Bootstrap -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
+
+  <link href="index.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="tree" id="app">
+    <tree-folder-contents :children="children"></tree-folder-contents>
+    <ul>
+      <li>
+        <a href="#">Parent</a>
+        <ul>
+          <li>
+            <a href="#">Child</a>
+            <ul>
+              <li>
+                <a href="#">Grand Child</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Child</a>
+            <ul>
+              <li><a href="#">Grand Child</a></li>
+              <li>
+                <a href="#">Grand Child</a>
+                <ul>
+                  <li>
+                    <a href="#">Great Grand Child</a>
+                  </li>
+                  <li>
+                    <a href="#">Great Grand Child</a>
+                  </li>
+                  <li>
+                    <a href="#">Great Grand Child</a>
+                    <ul>
+                      <li><a href="#">Grand Child</a></li>
+                      <li>
+                        <a href="#">Grand Child</a>
+                        <ul>
+                          <li>
+                            <a href="#">Great Grand Child</a>
+                          </li>
+                          <li>
+                            <a href="#">Great Grand Child</a>
+                          </li>
+                          <li>
+                            <a href="#">Great Grand Child</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a href="#">Grand Child</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="#">Grand Child</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/vue/dist/vue.min.js"></script>
+  <script src="index.js" type="text/javascript"></script>
+
+</body>
+
+</html>
