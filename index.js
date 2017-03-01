@@ -1,62 +1,52 @@
-var treeFolderContents = {
-  props: ['children'],
-  components: {
-    "tree-folder": treeFolder
-  },
-  template: '<ul>' +
-    '<li v-for="child in children">' +
-    '<tree-folder v-if="child.children" :children="child"/>' +
-    '<span v-else>{{ child.name }}</span>' +
-    '</li>' +
-    '</ul>'
+var data = {
+  name: '+',
+  children: []
 }
 
-var treeFolder = {
-  // props: ['folder'],
-  // template: "<p>" +
-  //   '<span>{{ folder.name }}</span>' +
-  //   '<tree-folder-contents :children="folder.children"/>' +
-  //   '</p>'
-
-  props: ['children'],
-  components: {
-    "tree-folder-contents": treeFolderContents
+// define the item component
+Vue.component('tree', {
+  template: '#tree-template',
+  props: {
+    model: Object
   },
-  template: "<p>testete</p>"
-}
-
-var app = new Vue({
-  el: '#app',
-  components: {
-    "tree-folder": treeFolder,
-    "tree-folder-contents": treeFolderContents
+  data: function () {
+    return {
+      open: false
+    }
   },
-  data: {
-    children: [{
-      name: "x folder",
-      children: [{
-        name: "x1",
-        children: [{
-          name: "x11",
-          children: [{
-            name: "x111"
-          }, {
-            name: "x112"
-          }]
-        }]
-      }, {
-        name: "x2",
-        children: [{
-          name: "x21"
-        }, {
-          name: "x22",
-          children: [{
-            name: "x221"
-          }, {
-            name: "x222"
-          }]
-        }]
-      }]
-    }]
+  computed: {
+    isFolder: function () {
+      return this.model.children &&
+        this.model.children.length
+    }
+  },
+  methods: {
+    toggle: function () {
+      if (this.isFolder) {
+        this.open = !this.open
+      }
+    },
+    changeType: function () {
+      if (!this.isFolder) {
+        Vue.set(this.model, 'children', [])
+        this.addChild()
+        this.open = true
+      }
+    },
+    addChild: function () {
+      var childName = "Children";
+      if (!childName) return;
+      this.model.children.push({
+        name: childName
+      })
+    }
   }
-});
+})
+
+// boot up the demo
+var demo = new Vue({
+  el: '#app',
+  data: {
+    treeData: data
+  }
+})
