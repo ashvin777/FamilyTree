@@ -1,5 +1,5 @@
 var data = {
-  name: '+',
+  name: '',
   children: []
 }
 
@@ -9,44 +9,67 @@ Vue.component('tree', {
   props: {
     model: Object
   },
-  data: function () {
+  data: function() {
     return {
       open: false
     }
   },
   computed: {
-    isFolder: function () {
+    isFolder: function() {
       return this.model.children &&
         this.model.children.length
     }
   },
   methods: {
-    toggle: function () {
+    toggle: function() {
       if (this.isFolder) {
         this.open = !this.open
       }
     },
-    changeType: function () {
+    changeType: function() {
       if (!this.isFolder) {
         Vue.set(this.model, 'children', [])
         this.addChild()
         this.open = true
+      } else {
+        this.addChild();
       }
     },
-    addChild: function () {
+    addChild: function() {
       var childName = "Children";
       if (!childName) return;
       this.model.children.push({
         name: childName
-      })
+      });
+    },
+    remove : function(){
+
+      var index = this.$parent.model.children.indexOf(this.model)
+    this.$parent.model.children.splice(index, 1)
+
+      // delete this.$parent.model.children[this.$parent.model.children.indexOf(this.model)];
+      // this.$parent.model.children.$remove(this.model);
     }
   }
 })
 
+Vue.use(VueMaterial)
 // boot up the demo
-var demo = new Vue({
+new Vue({
   el: '#app',
   data: {
     treeData: data
+  },
+  watch: {
+    treeData: {
+      handler: function(newTreeData) {
+        localStorage.setItem("TREE_DATA", JSON.stringify(newTreeData));
+      },
+      deep: true
+    }
+  },
+  mounted: function() {
+    this.treeData = JSON.parse(localStorage.getItem("TREE_DATA")) || {};
+    $(this.$el).scrollLeft(2500 - $(this.$el).width() / 2);
   }
 })

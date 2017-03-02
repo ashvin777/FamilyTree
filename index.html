@@ -7,7 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Family Tree</title>
   <!-- Bootstrap -->
-  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
+
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
   <link href="index.css" rel="stylesheet">
 
@@ -18,20 +22,33 @@
   <!-- item template -->
   <script type="text/x-template" id="tree-template">
     <li>
-      <div class="node" @click="toggle" @dblclick="changeType">
-        <span>
-          <span>{{model.name}}</span>
-          <span v-if="isFolder" class="node-hide-show">[{{open ? '-' : '+'}}]</span>
-        </span>
+      <div class="node">
+        <div>
+          <img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/supportmale-2-128.png" class="node-icon" />
+          <div class="node-name">
+            <input v-model="model.name" />
+          </div>
+          <div class="node-actions">
+            <div class="node-plus" @click="changeType">
+              <i class="glyphicon glyphicon-plus"></i>
+            </div>
+            <div class="node-plus" @click="toggle">
+              <i v-if="isFolder && open" class="glyphicon glyphicon-triangle-top"></i>
+              <i v-if="isFolder && !open" class="glyphicon glyphicon-triangle-bottom"></i>
+            </div>
+            <div class="node-plus" @click="remove">
+              <i class="glyphicon glyphicon-remove"></i>
+            </div>
+          </div>
+        </div>
       </div>
       <ul v-show="open" v-if="isFolder">
         <tree class="item" v-for="model in model.children" :model="model">
         </tree>
-        <li class="add" @click="addChild">+</li>
       </ul>
     </li>
   </script>
-
+  
   <!-- the demo root element -->
   <div id="app" class="tree">
     <ul>
@@ -43,8 +60,10 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
   <script src="bower_components/vue/dist/vue.min.js"></script>
+  <script src="node_modules/vue-material/dist/vue-material.js"></script>
+
   <script src="index.js" type="text/javascript"></script>
 
 </body>

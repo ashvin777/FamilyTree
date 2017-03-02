@@ -8,9 +8,9 @@
 .tree ul {
   padding-top: 20px;
   position: relative;
-  transition: all 0.5s;
+  /*transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+  -moz-transition: all 0.5s;*/
 }
 
 .tree li {
@@ -19,9 +19,9 @@
   list-style-type: none;
   position: relative;
   padding: 20px 5px 0 5px;
-  transition: all 0.5s;
+  /*transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+  -moz-transition: all 0.5s;*/
 }
 
 
@@ -56,9 +56,6 @@ any siblings*/
 
 .tree li:only-child {
   padding-top: 0;
-  padding-top: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 
@@ -109,9 +106,9 @@ right connector from last child*/
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  transition: all 0.5s;
+  /*transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+  -moz-transition: all 0.5s;*/
 }
 
 
@@ -140,23 +137,72 @@ Thanks :)*/
 html, body {
   background: #26272c;
   color: white;
+  height: 100%;
 }
 
-#app {
+.tree {
   text-align: center;
+  overflow: auto;
+  height: 100%;
 }
 
-.node>span {
-  padding: 2px 10px;
-  border: 1px solid white;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 20px;
+.tree>ul {
+  width: 5000px;
+  height: 100%;
 }
 
-.node .node-hide-show {
-  position: absolute;
-  bottom: 0px;
+.tree li:only-child {
   left: 50%;
   transform: translateX(-50%);
+}
+
+.node {
+  border: 1px solid #212222;
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  background: #3c3e49;
+}
+
+.node .node-name input {
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  border: 0px;
+  height: 26px;
+}
+
+.node .node-icon {
+  width: 100%;
+}
+
+.node .node-plus {
+  text-align: right;
+}
+
+.node .node-actions {}
+
+.node .node-actions .node-plus {
+  width: 20px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background: #26272c;
+  display: inline-block;
+  float: left;
+  width: 33.33%;
+  border-left: 1px solid #212222;
+  font-size: 8px;
+}
+
+.node .node-actions .node-plus:first-child {
+  border: 0px;
+}
+
+.add>div {
+  background: #3c3e49;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
 }
