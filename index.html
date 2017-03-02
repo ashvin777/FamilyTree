@@ -83,8 +83,19 @@
         <md-icon>favorite</md-icon>
       </md-button>
     </md-toolbar>
+    <div class="md-subtoolbar">
+      <md-button class="md-icon-button" @click.native="scrollReset()">
+        <md-icon>face</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" @click.native="zoomOut()">
+        <md-icon>zoom_out</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" @click.native="zoomIn()">
+        <md-icon>zoom_in</md-icon>
+      </md-button>
+    </div>
     <div class="main-content">
-      <ul>
+      <ul v-bind:style="{ transform: 'scale('+zoom+')' }">
         <tree :model="treeData">
         </tree>
       </ul>

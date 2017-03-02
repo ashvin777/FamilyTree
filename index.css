@@ -142,18 +142,23 @@ html, body, body.md-theme-default {
 
 .tree {
   text-align: center;
-  overflow: auto;
   height: 100%;
 }
 
-.tree .main-content{
+.tree .main-content {
   text-align: center;
   overflow: auto;
-  height: calc( 100% - 64px );
+  height: calc( 100% - 104px);
 }
-.tree .main-content > ul {
+
+.tree .main-content>ul {
   width: 5000px;
   height: 100%;
+  transform-origin: center top;
+}
+
+.tree .main-content>ul>li {
+  margin: 30px 0px;
 }
 
 .tree li:only-child {
@@ -166,13 +171,13 @@ html, body, body.md-theme-default {
   margin: auto;
 }
 
-.md-card .md-card-header{
+.md-card .md-card-header {
   padding: 0px;
   margin-top: -45px;
   background-color: rgba(38, 39, 44, 0.57);
 }
 
-.md-card .md-card-header input{
+.md-card .md-card-header input {
   width: 100%;
   background: transparent;
   border: 0px;
@@ -183,10 +188,19 @@ html, body, body.md-theme-default {
   font-size: 16px;
   padding-left: 8px;
 }
-.md-card .md-card-actions{
-  padding:0px;
+
+.md-card .md-card-actions {
+  padding: 0px;
+}
+
+.md-subtoolbar {
+  min-height: 40px;
+  line-height: 40px;
+  text-align: right;
+  color: #fce2eb;
+  background: rgba(0, 0, 0, 0.17);
 }
 
 ul:not(.md-list)>li+li {
-   margin-top: 0px;
+  margin-top: 0px;
 }
