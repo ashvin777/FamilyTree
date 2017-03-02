@@ -53,7 +53,7 @@ Vue.component('tree', {
   }
 })
 
-Vue.use(VueMaterial)
+Vue.use(VueMaterial);
 // boot up the demo
 new Vue({
   el: '#app',
@@ -70,6 +70,7 @@ new Vue({
   },
   mounted: function() {
     this.treeData = JSON.parse(localStorage.getItem("TREE_DATA")) || {};
-    $(this.$el).scrollLeft(2500 - $(this.$el).width() / 2);
+    var $mainContent = $(this.$el).find(".main-content");
+    $mainContent.scrollLeft(2500 - $mainContent.width() / 2);
   }
 })

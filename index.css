@@ -134,8 +134,8 @@ right connector from last child*/
 /*Thats all. I hope you enjoyed it.
 Thanks :)*/
 
-html, body {
-  background: #26272c;
+html, body, body.md-theme-default {
+  background: #26272c!important;
   color: white;
   height: 100%;
 }
@@ -146,7 +146,12 @@ html, body {
   height: 100%;
 }
 
-.tree>ul {
+.tree .main-content{
+  text-align: center;
+  overflow: auto;
+  height: calc( 100% - 64px );
+}
+.tree .main-content > ul {
   width: 5000px;
   height: 100%;
 }
@@ -157,52 +162,31 @@ html, body {
 }
 
 .node {
-  border: 1px solid #212222;
-  position: relative;
-  display: inline-block;
-  width: 90px;
-  background: #3c3e49;
+  width: 130px;
+  margin: auto;
 }
 
-.node .node-name input {
+.md-card .md-card-header{
+  padding: 0px;
+  margin-top: -45px;
+  background-color: rgba(38, 39, 44, 0.57);
+}
+
+.md-card .md-card-header input{
   width: 100%;
-  text-align: center;
   background: transparent;
   border: 0px;
-  height: 26px;
-}
-
-.node .node-icon {
-  width: 100%;
-}
-
-.node .node-plus {
-  text-align: right;
-}
-
-.node .node-actions {}
-
-.node .node-actions .node-plus {
-  width: 20px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  background: #26272c;
-  display: inline-block;
-  float: left;
-  width: 33.33%;
-  border-left: 1px solid #212222;
-  font-size: 8px;
-}
-
-.node .node-actions .node-plus:first-child {
+  height: 45px;
   border: 0px;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 8px;
+}
+.md-card .md-card-actions{
+  padding:0px;
 }
 
-.add>div {
-  background: #3c3e49;
-  border-radius: 100%;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
+ul:not(.md-list)>li+li {
+   margin-top: 0px;
 }

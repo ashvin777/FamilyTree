@@ -9,38 +9,59 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-
   <link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
-
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
   <link href="index.css" rel="stylesheet">
 
 </head>
 
 <body>
-
   <!-- item template -->
   <script type="text/x-template" id="tree-template">
     <li>
       <div class="node">
-        <div>
-          <img src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/supportmale-2-128.png" class="node-icon" />
-          <div class="node-name">
-            <input v-model="model.name" />
-          </div>
-          <div class="node-actions">
-            <div class="node-plus" @click="changeType">
-              <i class="glyphicon glyphicon-plus"></i>
-            </div>
-            <div class="node-plus" @click="toggle">
-              <i v-if="isFolder && open" class="glyphicon glyphicon-triangle-top"></i>
-              <i v-if="isFolder && !open" class="glyphicon glyphicon-triangle-bottom"></i>
-            </div>
-            <div class="node-plus" @click="remove">
-              <i class="glyphicon glyphicon-remove"></i>
-            </div>
-          </div>
-        </div>
+        <md-card md-with-hover>
+          <md-card-media>
+            <md-card-media md-ratio="1:1">
+              <img src="img/male.png" alt="Skyscraper">
+            </md-card-media>
+
+            <md-card-area>
+              <md-card-header>
+                <input v-model="model.name" />
+              </md-card-header>
+
+              <md-card-actions>
+                <md-button class="md-icon-button" @click.native="changeType">
+                  <md-icon>person_add</md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" @click.native="toggle">
+                  <md-icon v-if="isFolder && !open">arrow_drop_down</md-icon>
+                  <md-icon v-if="isFolder && open">arrow_drop_up</md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button">
+                  <md-menu>
+                    <md-icon md-menu-trigger>more_vert</md-icon>
+                    <md-menu-content>
+                      <md-menu-item>
+                        <span>Add Parents</span>
+                        <md-icon>exposure_plus_1</md-icon>
+                      </md-menu-item>
+                      <md-menu-item @click.native="remove">
+                        <span>Delete</span>
+                        <md-icon>delete</md-icon>
+                      </md-menu-item>
+                      <md-menu-item>My Item 3</md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+
+                </md-button>
+              </md-card-actions>
+            </md-card-area>
+          </md-card-media>
+        </md-card>
       </div>
       <ul v-show="open" v-if="isFolder">
         <tree class="item" v-for="model in model.children" :model="model">
@@ -48,13 +69,26 @@
       </ul>
     </li>
   </script>
-  
+
   <!-- the demo root element -->
   <div id="app" class="tree">
-    <ul>
-      <tree :model="treeData">
-      </tree>
-    </ul>
+    <md-toolbar class="md-accent">
+      <md-button class="md-icon-button">
+        <md-icon>menu</md-icon>
+      </md-button>
+
+      <h2 class="md-title" style="flex: 1">Family Tree</h2>
+
+      <md-button class="md-icon-button">
+        <md-icon>favorite</md-icon>
+      </md-button>
+    </md-toolbar>
+    <div class="main-content">
+      <ul>
+        <tree :model="treeData">
+        </tree>
+      </ul>
+    </div>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
