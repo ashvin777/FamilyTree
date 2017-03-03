@@ -19,8 +19,8 @@
   <!-- item template -->
   <script type="text/x-template" id="tree-template">
     <li>
-      <div class="node">
-        <md-card md-with-hover>
+      <div class="node" v-for="member in model.members" :class="{ 'partners' : model.members.length > 1}">
+        <md-card md-with-hover >
           <md-card-media>
             <md-card-media md-ratio="1:1">
               <img src="img/male.png" alt="Skyscraper">
@@ -28,7 +28,7 @@
 
             <md-card-area>
               <md-card-header>
-                <input v-model="model.name" />
+                <input v-model="member.name" />
               </md-card-header>
 
               <md-card-actions>
@@ -53,8 +53,6 @@
                         <span>Delete</span>
                         <md-icon>delete</md-icon>
                       </md-menu-item>
-                      <md-menu-item>My Item 3</md-menu-item>
-                    </md-menu-content>
                   </md-menu>
 
                 </md-button>

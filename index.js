@@ -1,3 +1,17 @@
+var data = {
+  "members": [{
+    "id": "34sdt348f7",
+    "name": "Natālija",
+    "sex": 2,
+    "image": "people/kurchik.jpg"
+  },{
+    "id": "34sdt348f7",
+    "name": "Natālija",
+    "sex": 2,
+    "image": "people/kurchik.jpg"
+  }],
+  children: []
+};
 // define the item component
 Vue.component('tree', {
   template: '#tree-template',
@@ -14,6 +28,8 @@ Vue.component('tree', {
       return this.model.children &&
         this.model.children.length
     }
+  },
+  watch: {
   },
   methods: {
     toggle: function() {
@@ -32,9 +48,13 @@ Vue.component('tree', {
     },
     addChild: function() {
       var childName = "Children";
-      if (!childName) return;
       this.model.children.push({
-        name: childName
+        "members": [{
+          "id": "34sdt348f7",
+          "name": childName,
+          "sex": 2,
+          "image": "people/kurchik.jpg"
+        }]
       });
     },
     remove: function() {
@@ -48,10 +68,7 @@ Vue.use(VueMaterial);
 new Vue({
   el: '#app',
   data: {
-    treeData: {
-      name: '',
-      children: []
-    },
+    treeData: data,
     zoom: 1
   },
   watch: {
@@ -63,7 +80,7 @@ new Vue({
     }
   },
   mounted: function() {
-    this.treeData = JSON.parse(localStorage.getItem("TREE_DATA")) || {};
+    this.treeData = JSON.parse(localStorage.getItem("TREE_DATA")) || this.treeData;
     var $mainContent = $(this.$el).find(".main-content");
     $mainContent.scrollLeft(2500 - $mainContent.width() / 2);
     $mainContent.scrollTop(100);
@@ -76,7 +93,7 @@ new Vue({
       this.zoom = this.zoom + 0.3;
     },
     zoomOut: function($event) {
-      if (this.zoom < 1) {
+      if (this.zoom < 0.5) {
         return;
       }
       this.zoom = this.zoom - 0.3;
@@ -84,7 +101,7 @@ new Vue({
     scrollReset: function() {
       var $mainContent = $(this.$el).find(".main-content");
       $mainContent.scrollLeft(2500 - $mainContent.width() / 2);
-      $mainContent.scrollTop(100);
+      $mainContent.scrollTop(0);
     }
   }
 })
