@@ -1,114 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Family Tree</title>
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="bower_components/vue-material/dist/vue-material.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
-  <link href="index.css" rel="stylesheet">
-
-</head>
-
-<body>
-  <!-- item template -->
-  <script type="text/x-template" id="tree-template">
-    <li>
-      <div class="node" v-for="member in model.members" :class="{ 'partners' : model.members.length > 1}">
-        <md-card md-with-hover >
-          <md-card-media>
-            <md-card-media md-ratio="1:1">
-              <img src="img/male.png" alt="Skyscraper">
-            </md-card-media>
-
-            <md-card-area>
-              <md-card-header>
-                <input v-model="member.name" />
-              </md-card-header>
-
-              <md-card-actions>
-                <md-button class="md-icon-button" @click.native="changeType">
-                  <md-icon>person_add</md-icon>
-                </md-button>
-
-                <md-button class="md-icon-button" @click.native="toggle">
-                  <md-icon v-if="isFolder && !open">arrow_drop_down</md-icon>
-                  <md-icon v-if="isFolder && open">arrow_drop_up</md-icon>
-                </md-button>
-
-                <md-button class="md-icon-button">
-                  <md-menu>
-                    <md-icon md-menu-trigger>more_vert</md-icon>
-                    <md-menu-content>
-                      <md-menu-item>
-                        <span>Add Parents</span>
-                        <md-icon>exposure_plus_1</md-icon>
-                      </md-menu-item>
-                      <md-menu-item @click.native="remove">
-                        <span>Delete</span>
-                        <md-icon>delete</md-icon>
-                      </md-menu-item>
-                  </md-menu>
-
-                </md-button>
-              </md-card-actions>
-            </md-card-area>
-          </md-card-media>
-        </md-card>
-      </div>
-      <ul v-show="open" v-if="isFolder">
-        <tree class="item" v-for="model in model.children" :model="model">
-        </tree>
-      </ul>
-    </li>
-  </script>
-
-  <!-- the demo root element -->
-  <div id="app" class="tree">
-    <md-toolbar class="md-accent">
-      <md-button class="md-icon-button">
-        <md-icon>menu</md-icon>
-      </md-button>
-
-      <h2 class="md-title" style="flex: 1">Family Tree</h2>
-
-      <md-button class="md-icon-button">
-        <md-icon>favorite</md-icon>
-      </md-button>
-    </md-toolbar>
-    <div class="md-subtoolbar">
-      <md-button class="md-icon-button" @click.native="scrollReset()">
-        <md-icon>face</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" @click.native="zoomOut()">
-        <md-icon>zoom_out</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" @click.native="zoomIn()">
-        <md-icon>zoom_in</md-icon>
-      </md-button>
-    </div>
-    <div class="main-content">
-      <ul v-bind:style="{ transform: 'scale('+zoom+')' }">
-        <tree :model="treeData">
-        </tree>
-      </ul>
-    </div>
-  </div>
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <!-- <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
-  <script src="bower_components/vue/dist/vue.min.js"></script>
-  <script src="bower_components/vue-material/dist/vue-material.js"></script>
-
-  <script src="index.js" type="text/javascript"></script>
-
-</body>
-
+  <head>
+    <meta charset="utf-8">
+    <title>familytree</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
+  </body>
 </html>
