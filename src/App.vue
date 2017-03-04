@@ -24,7 +24,7 @@
   </div>
   <div class="main-content">
     <ul v-bind:style="{ transform: 'scale('+zoom+')' }">
-      <tree :model="treeData">
+      <tree :model="treeData" :friends="friends">
       </tree>
     </ul>
   </div>
@@ -35,26 +35,20 @@
 import $ from 'jquery'
 import Tree from './Tree.vue'
 import TreeStyle from "./TreeStyle.vue"
+import FB from "./FB"
 
 export default {
   name: 'app',
-  components : { Tree },
+  components: {
+    Tree
+  },
   data: function() {
     return {
       treeData: {
-        "members": [{
-          "id": "34sdt348f7",
-          "name": "Natālija",
-          "sex": 2,
-          "image": "people/kurchik.jpg"
-        }, {
-          "id": "34sdt348f7",
-          "name": "Natālija",
-          "sex": 2,
-          "image": "people/kurchik.jpg"
-        }],
+        members: [],
         children: []
       },
+      friends: [],
       zoom: 1
     }
   },
@@ -71,8 +65,37 @@ export default {
     var $mainContent = $(this.$el).find(".main-content");
     $mainContent.scrollLeft(2500 - $mainContent.width() / 2);
     $mainContent.scrollTop(100);
+    this.initFB(this.getAccountDetails);
   },
   methods: {
+    initFB: function(callback) {
+      FB.init(function(response) {
+        if (response.status === 'connected') {
+          callback();
+        } else if (response.status === 'not_authorized') {
+          FB.login(function() {
+            callback();
+          });
+        } else {
+          console.log("other login error");
+        }
+      });
+    },
+    getAccountDetails: function() {
+      let self = this;
+      FB.getProfile(function(profile) {
+        if (self.treeData.members.length == 0) {
+          self.treeData.members.push(profile);
+          self.getFriends();
+        }
+      });
+    },
+    getFriends: function() {
+      let self = this;
+      FB.getFriends(function(friends) {
+        self.friends = friends.data.slice(0, 10);
+      });
+    },
     zoomIn: function($event) {
       if (this.zoom >= 1.5) {
         return;
