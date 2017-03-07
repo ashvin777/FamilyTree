@@ -1,10 +1,10 @@
 <template>
 <li>
   <div class="node" v-for="member in model.members" :key="member.id" :class="{ 'partners' : model.members.length > 1,  'open' : open, 'root' : !$parent.model}">
-    <TreeMember :model="model" :member="member"></TreeMember>
+    <TreeMember :model="model" :member="member" @show="$emit('show')"></TreeMember>
   </div>
   <ul v-show="open" v-if="isFolder">
-    <TreeMembers class="item" v-for="(model, index) in model.children" :model="model" :key="index" >
+    <TreeMembers class="item" v-for="(model, index) in model.children" :model="model" :key="index" @show="$emit('show')">
     </TreeMembers>
   </ul>
 </li>

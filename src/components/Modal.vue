@@ -1,6 +1,6 @@
 <template>
 <transition name="modal">
-  <div class="modal-mask">
+  <div class="modal-mask" @click="onClickModal($event)">
     <div class="modal-wrapper">
       <div class="modal-container">
 
@@ -28,7 +28,15 @@
 </template>
 
 <script>
-
+export default {
+  methods: {
+    onClickModal: function($event) {
+      if ($($event.target).closest(".modal-container").length == 0) {
+        this.$emit('close');
+      }
+    }
+  }
+}
 </script>
 
 <style>
@@ -68,6 +76,7 @@
 .modal-body {
   margin: 20px 0;
 }
+
 
 /*
  * The following styles are auto-applied to elements with

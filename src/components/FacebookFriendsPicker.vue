@@ -1,6 +1,6 @@
 <template>
-<div>
-  <Modal v-if="showModal" @close="showModal = false" class="friends-modal">
+  <div>
+  <Modal class="friends-modal" v-if="show" @close="$emit('close')">
     <h3 slot="header">
       <md-input-container md-inline>
        <label>Search</label>
@@ -32,7 +32,6 @@
     </div>
     <div slot="footer"></div>
   </Modal>
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
 </div>
 </template>
 
@@ -47,11 +46,13 @@ export default {
     Modal,
     InfiniteLoading
   },
+  props: {
+    show:  Boolean
+  },
   data: () => {
     return {
       friendsFullList: [],
       friends: [],
-      showModal: false,
       query: ""
     }
   },

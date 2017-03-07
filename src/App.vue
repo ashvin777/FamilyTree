@@ -2,35 +2,11 @@
 <div id="app" v-cloak>
   <Navbar></Navbar>
   <div class="main-content">
-    <TreeContainer></TreeContainer>
+    <TreeContainer @show="showPicker = true" ></TreeContainer>
   </div>
-  <FacebookFriendsPicker></FacebookFriendsPicker>
+  <FacebookFriendsPicker :show.sync="showPicker" @close="showPicker = false"></FacebookFriendsPicker>
 </div>
 </template>
-
-<style lang="scss">
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-html, body{
-    background: #26272c !important;
-    color: white;
-    height: 100%;
-    &.md-theme-default {
-        background: #26272c !important;
-        color: white;
-        height: 100%;
-    }
-    #app {
-        height: 100%;
-        .main-content {
-            height: calc( 100% - 64px);
-        }
-    }
-}
-</style>
 
 <script>
 import TreeContainer from './tree/TreeContainer.vue'
@@ -47,6 +23,37 @@ export default {
     TreeContainer,
     Navbar,
     FacebookFriendsPicker
+  },
+  data: function(){
+    return {
+      showPicker: false
+    }
   }
 }
 </script>
+
+
+<style lang="scss">
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body,
+html {
+    background: #26272c !important;
+    color: white;
+    height: 100%;
+    &.md-theme-default {
+        background: #26272c !important;
+        color: white;
+        height: 100%;
+    }
+    #app {
+        height: 100%;
+        .main-content {
+            height: calc( 100% - 64px);
+        }
+    }
+}
+</style>

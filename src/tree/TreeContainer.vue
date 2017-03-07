@@ -13,7 +13,7 @@
   </div>
 
   <ul v-bind:style="{ transform: 'scale('+zoom+')' }">
-    <TreeMembers :model="treeData">
+    <TreeMembers :model="treeData" @show="$emit('show')">
     </TreeMembers>
   </ul>
 </div>

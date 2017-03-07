@@ -82,10 +82,12 @@ export default {
     },
     addChild: function(child) {
       var childName = "Children";
-      this.model.children.push({
-        members: [child],
-        children: []
-      });
+      this.$emit("show");
+      //console.log(this.$emirt.showFriendsPickerModal);
+      // this.model.children.push({
+      //   members: [child],
+      //   children: []
+      // });
       this.open = true;
     },
     addSpouse: function() {
