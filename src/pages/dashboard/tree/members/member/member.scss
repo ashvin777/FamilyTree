@@ -1,0 +1,98 @@
+.tree {
+ .card {
+  margin: 0;
+  background: none;
+  .card-header {
+   padding: 0;
+   height: 140px;
+   background-size: cover;
+   background-position: center center;
+   input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: transparent;
+    border: 0;
+    line-height: 35px;
+    border: 0;
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+    padding-left: 8px;
+    background-color: rgba(38, 39, 44, 0.7);
+    box-sizing: border-box;
+   }
+   &::after {
+    display: none;
+   }
+  }
+  .card-footer {
+   padding: 0 7px;
+   background: #1b1b1b;
+   margin-top: -1px;
+   min-height: 40px;
+   &::before {
+    display: none;
+   }
+   a {
+    color: white;
+    width: auto;
+    min-width: 40px;
+    height: auto;
+    &:active {
+     opacity: 0.3;
+    }
+   }
+  }
+ }
+}
+
+.node {
+ width: 130px;
+ margin: auto;
+ display: inline-block;
+ padding: 0 10px;
+ position: relative;
+ &.partners {
+  &:nth-of-type(1):after {
+   content: '';
+   position: absolute;
+   top: 50%;
+   right: -0.5px;
+   border-top: 1px solid #ccc;
+   width: 11px;
+   height: 0;
+  }
+  &:nth-of-type(2):after {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: -1px;
+   border-top: 1px solid #ccc;
+   width: 11px;
+   height: 0;
+  }
+  &.open {
+   &:nth-of-type(1):before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -0.5px;
+    border-right: 1px solid #ccc;
+    width: 0;
+    height: 50%;
+   }
+  }
+  &:not(.root) {
+   &:nth-of-type(2):before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -0px;
+    border-right: 1px solid #ccc;
+    width: 0;
+    height: 50%;
+   }
+  }
+ }
+}

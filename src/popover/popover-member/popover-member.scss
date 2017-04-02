@@ -1,0 +1,35 @@
+@import "../../css/constants.scss";
+.popover-member.popover {
+ padding: 20px;
+ width: 440px;
+ color: black;
+ font-family: $FontFamily;
+
+ top: 50%!important;
+ left:50%!important;
+ @include css3("transform", "translate(-50%, -50%)");
+ .image {
+  width: 100%;
+  height: 182px;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 5px;
+
+ }
+ .title {
+  font-size: 20px;
+  font-weight: 800;
+ }
+ .buttons {
+  padding-top: 10px;
+  .button {
+   display: inline-block;
+  }
+  .button-icon {
+   min-width: 35px;
+  }
+  .f7-icons {
+   font-size: 16px;
+  }
+ }
+}

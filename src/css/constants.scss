@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700");
+
+$PageBackgroundColor: #212121;
+$PageNavbarColor: white;
+$PageFontColor: white;
+$FontFamily: 'Roboto Condensed', sans-serif;
+$NavbarBg: #e91e63;
+$SubnavbarBg: #1b1b1b;
+
+//mixins
+@mixin css3($property, $value) {
+ -webkit-#{$property}: #{$value};
+ -khtml-#{$property}: #{$value};
+ -moz-#{$property}: #{$value};
+ -ms-#{$property}: #{$value};
+ -o-#{$property}: #{$value};
+ #{$property}: #{$value};
+}

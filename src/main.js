@@ -24,16 +24,20 @@ import Routes from './routes.js'
 // Import App Component
 import App from './app'
 
+//store
+import store from './store'
+
 import $ from 'jquery'
 
 window.$ = $;
 
 // Init F7 Vue Plugin
-Vue.use(Framework7Vue)
+Vue.use(Framework7Vue);
 
 // Init App
 new Vue({
   el: '#app',
+  store,
   template: '<app/>',
   // Init Framework7 by passing parameters here
   framework7: {
@@ -41,6 +45,7 @@ new Vue({
     /* Uncomment to enable Material theme: */
     material: true,
     routes: Routes,
+    pushState: true
   },
   // Register App Component
   components: {

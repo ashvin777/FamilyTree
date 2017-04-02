@@ -1,0 +1,58 @@
+@import "../../css/constants.scss";
+.popup.popup-add-member {
+ font-family: $FontFamily;
+ height: 500px;
+ position: absolute;
+ top: 50%!important;
+ margin-top: 0!important;
+ @include css3("transform", "translate3d(0,0,0) translateY(-50%)!important");
+ &.modal-out {
+  @include css3("transform", "translate3d(0,1px,0)");
+  opacity: 0;
+  display: none!important;
+ }
+ .toolbar {
+  width: 100%;
+  background: $NavbarBg;
+  height: 75px;
+ }
+ .tabs {
+  padding-top: 75px;
+  height: calc( 100% - 75px);
+  overflow: auto;
+ }
+ .fb-friend {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  height: 80px;
+  vertical-align: top;
+  padding: 10px 0;
+  color: black;
+  >div {
+   padding: 10px;
+  }
+  position: relative;
+  .f7-icons {
+   position: absolute;
+   top: 20px;
+   left: 38px;
+   line-height: 50px;
+   width: 50px;
+   border-radius: 100%;
+   color: rgba(255, 255, 255, 0);
+   font-size: 22px;
+  }
+  .f7-icons:hover {
+   background: rgba(0, 0, 0, 0.5);
+   color: rgba(255, 255, 255, 0.4);
+  }
+  .fb-friend-pic {
+   height: 50px;
+   width: 50px;
+   margin: auto;
+   background-size: cover;
+   border-radius: 100%;
+  }
+ }
+}

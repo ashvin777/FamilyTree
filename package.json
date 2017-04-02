@@ -32,7 +32,8 @@
     "framework7-vue": "^0.8.4",
     "jquery": "^3.1.1",
     "sass-loader": "^6.0.3",
-    "vue": "^2.1.10"
+    "vue": "^2.1.10",
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
