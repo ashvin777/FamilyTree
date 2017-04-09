@@ -1,0 +1,10 @@
+{
+  "web": {
+    "client_id": "503829874595-v48nmlefgvstk57d5h9p64upnmgor7sc.apps.googleusercontent.com",
+    "project_id": "family-tree-777",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "xRD0gW3wo1rqc2yd-JL2qqt7"
+  }
+}

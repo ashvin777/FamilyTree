@@ -1,5 +1,5 @@
 @import "../../css/constants.scss";
-.popup.popup-add-member {
+.popup.popup-member{
  font-family: $FontFamily;
  height: 500px;
  position: absolute;
@@ -11,26 +11,52 @@
   opacity: 0;
   display: none!important;
  }
- .toolbar {
-  width: 100%;
+ .navbar {
   background: $NavbarBg;
-  height: 75px;
+  .navbar-inner{
+    padding: 0 25px;
+    .center{
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+  }
  }
- .tabs {
-  padding-top: 75px;
-  height: calc( 100% - 75px);
-  overflow: auto;
+ .popover-content{
+   height: calc( 100% - 56px - 48px );
+   overflow: auto;
+   .list-block{
+     margin: 0px;
+   }
+ }
+ .toolbar{
+   width: 100%;
+   font-size: 14px;
+   text-align: center;
+   .link{
+     width: 100%;
+   }
+   .f7-icons{
+     padding-left: 15px;
+     font-size: 16px;
+   }
  }
  .fb-friend {
   display: inline-block;
-  width: 20%;
-  text-align: center;
-  height: 80px;
+  width: 100%;
+  padding: 0 25px;
   vertical-align: top;
-  padding: 10px 0;
   color: black;
   >div {
-   padding: 10px;
+   padding: 10px 0;
+   border-bottom: 1px solid #dfdfdf;
+  }
+  &.fb-friend-input{
+    padding-top: 10px;
+    >div{
+      padding: 0px;
+      border: 0px;
+    }
   }
   position: relative;
   .f7-icons {
@@ -47,12 +73,9 @@
    background: rgba(0, 0, 0, 0.5);
    color: rgba(255, 255, 255, 0.4);
   }
-  .fb-friend-pic {
-   height: 50px;
-   width: 50px;
-   margin: auto;
-   background-size: cover;
-   border-radius: 100%;
+  .fb-friend-email, .fb-friend-contact {
+   font-size: 12px;
+   color: gray;
   }
  }
 }

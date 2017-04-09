@@ -1,8 +1,9 @@
 <template>
-  <f7-popover class="popover-member" @popover:close="onClosed" v-if="member != null">
+  <f7-popover class="popover-member" v-if="member != null">
     <div class="row">
       <div class="col-30">
-        <div class="image" v-bind:style=" { backgroundImage: 'url(\'http://graph.facebook.com/'+member.id+'/picture?type=square&height=400\')' }"></div>
+        <div class="image" v-if="!member.picture" v-bind:style=" { backgroundImage: 'url(\'http://graph.facebook.com/'+member.id+'/picture?type=square&height=400\')' }"></div>
+        <div class="image" v-if="member.picture" v-bind:style=" { backgroundImage: 'url(\''+member.picture.data.url+'\')' }"></div>
       </div>
       <div class="col-70">
         <div class="title">{{member.name}}</div>
@@ -13,15 +14,12 @@
         <div class="email">Email : ashvin.suthar777@gmail.com</div>
         <div class="buttons">
           <a href="#" class="button button-raised button-fill color-pink">
-            <i class="f7-icons">person_fill</i> Profile
-          </a>
-          <a href="#" class="button button-raised button-fill color-pink">
             <i class="f7-icons">compose_fill</i> Edit
           </a>
           <a href="#" class="button button-raised button-fill color-pink open-popup close-popover" data-popup=".popup-add-member">
             <i class="f7-icons">add</i> Add Relative
           </a>
-          <a href="#" class="button button-raised button-fill color-pink button-icon">
+          <a href="#" class="button button-raised button-fill color-pink button-icon" @click="deleteMember()">
             <i class="f7-icons">trash</i>
           </a>
         </div>

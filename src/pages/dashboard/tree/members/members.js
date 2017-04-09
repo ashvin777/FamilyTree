@@ -1,5 +1,6 @@
 import member from "./member/member.vue"
 export default {
+  name: "members",
   props: {
     model: Object
   },

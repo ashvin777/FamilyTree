@@ -7,18 +7,19 @@
    height: 140px;
    background-size: cover;
    background-position: center center;
-   input {
+   .title {
     position: absolute;
     bottom: 0;
     width: 100%;
     background: transparent;
     border: 0;
-    line-height: 35px;
+    line-height: 20px;
+    padding: 5px 0px;
     border: 0;
     color: white;
     font-weight: 300;
     font-size: 16px;
-    padding-left: 8px;
+    padding-left: 0px;
     background-color: rgba(38, 39, 44, 0.7);
     box-sizing: border-box;
    }

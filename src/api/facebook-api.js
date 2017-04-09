@@ -16,7 +16,7 @@ export default {
       FB.init({
         appId: '553330161412370',
         xfbml: true,
-        version: 'v2.0',
+        version: 'v1.0',
         status: true,
         cookie: true,
         oauth: true

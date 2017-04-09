@@ -18,8 +18,12 @@ export default {
     "treeData" : "getTreeData"
   }),
   mounted(){
+    let self = this;
     this.onResetClick();
     this.$store.dispatch("loadTreeData", this.profile);
+    this.$store.watch(function(){
+      self.$store.dispatch("saveTreeDataInStorage");
+    });
   },
   methods: {
     onResetClick() {

@@ -1,9 +1,22 @@
 @import "../../../../css/constants.scss";
+.tree > .toolbar {
+  width: 60px;
+  background: $SubnavbarBg;
+  position: absolute;
+  right: 0px;
+  left: auto;
+  display: inline-block;
+  height: auto;
+  padding: 0px;
+  a {
+    display: block;
+    width: 50px;
+    margin: auto;
+    padding: 0px;
+    padding-top: 10px;
+  }
+}
 
-.toolbar {
- width: 180px;
- background: $SubnavbarBg;
- position: absolute;
- right: 0px;
- left: auto;
+.toolbar{
+  background: $SubnavbarBg;
 }

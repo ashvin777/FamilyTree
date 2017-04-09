@@ -17,6 +17,12 @@ const actions = {
     } else{
       commit(types.LOAD_TREE_DATA_FAILURE, profile);
     }
+  },
+  saveTreeDataInStorage({ commit, state}){
+    commit(types.SAVE_TREE_DATA_ON_CHANGE);
+  },
+  addParent({ commit, state }, member) {
+    commit(types.ADD_PARENT, member);
   }
 }
 
@@ -33,6 +39,18 @@ const mutations = {
     state.treeData.children = [];
     state.treeData.partners.push(profile);
     localStorage.setItem("TREE_DATA", JSON.stringify(state.treeData));
+  },
+  [types.SAVE_TREE_DATA_ON_CHANGE](state){
+    localStorage.setItem("TREE_DATA", JSON.stringify(state.treeData));
+  },
+  [types.ADD_PARENT](state, member){
+    state.treeData = {
+      id: new Date().getTime(),
+      children : [state.treeData],
+      partners: []
+    };
+    member.id = new Date().getTime();
+    state.treeData.partners.push(member);
   }
 }
 

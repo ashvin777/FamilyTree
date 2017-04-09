@@ -8,3 +8,5 @@ export default [
       component: require('./pages/dashboard/dashboard.vue')
   }
 ]
+
+window.location.hash = "!/#home";

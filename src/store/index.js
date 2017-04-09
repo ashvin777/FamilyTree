@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import * as actions from './actions'
 // import * as getters from './getters'
-import facebook from "./modules/facebook"
+// import facebook from "./modules/facebook"
 import tree from "./modules/tree"
 import member from "./modules/member"
+import google from "./modules/google"
 
 Vue.use(Vuex);
 
@@ -14,9 +15,9 @@ export default new Vuex.Store({
   // actions,
   // getters,
   modules: {
-    facebook,
     tree,
-    member
+    member,
+    google
   },
   strict: debug
 });

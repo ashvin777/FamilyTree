@@ -6,7 +6,10 @@
     <f7-nav-center sliding>Family Tree</f7-nav-center>
     <f7-nav-right>
       <f7-link>
-        <f7-icon material="favorite"></f7-icon>
+        <i class="f7-icons">person</i>
+      </f7-link>
+      <f7-link>
+        <i class="f7-icons">gear</i>
       </f7-link>
     </f7-nav-right>
   </f7-navbar>

@@ -1,27 +1,42 @@
 <template>
-  <f7-popup class="popup-add-member modal-in">
-    <div class="toolbar tabbar">
-      <div class="toolbar-inner">
-        <a class="tab-link active" href="#tab1">
-          <i class="f7-icons">social_facebook_fill</i> Add From Facebook
-        </a>
-        <a class="tab-link" href="#tab2">
-          <i class="f7-icons">compose_fill</i> Add Manualy
-        </a>
+  <f7-popup class="popup-add-member popup-member modal-in">
+    <f7-navbar>
+      <f7-nav-left>
+        <i class="f7-icons">social_googleplus</i>
+      </f7-nav-left>
+      <f7-nav-center sliding>Add From Google Contacts</f7-nav-center>
+    </f7-navbar>
+    <div class="popover-content">
+      <div class="list-block">
+        <ul>
+          <li>
+            <div class="fb-friend fb-friend-input">
+              <div>
+                <div class="item-input">
+                  <input type="text" name="name" placeholder="Search Contact" v-model="query" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="#" class="fb-friend open-popup" v-for="contact in filteredContacts" @click="selectContact(contact)" data-popup=".popup-member-details">
+              <div>
+                <div class="fb-friend-name">{{contact.title.$t}}</div>
+                <div class="fb-friend-email" v-for="email in contact.gd$email">
+                  Email: {{email.address}}
+                </div>
+                <div class="fb-friend-contact" v-for="phone in contact.gd$phoneNumber">
+                  <span v-if="phone.label">{{phone.label}}:</span> {{phone.$t}}
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="tabs">
-      <div id="tab1" class="tab active">
-        <a href="#" class="fb-friend" v-for="friend in friends" >
-          <div @click="addMember(friend)">
-            <i class="f7-icons">add</i>
-            <div class="fb-friend-pic" v-bind:style=" { backgroundImage: 'url(\''+friend.picture.data.url+'\')' }"></div>
-            <div class="fb-friend-name">{{friend.name}}</div>
-          </div>
-        </a>
-      </div>
-      <div id="tab2" class="tab">
-        <p>This is tab 2 content</p>
+    <div class="toolbar">
+      <div class="toolbar-inner">
+        <a href="#" class="link">Add Contact Manually <i class="f7-icons">right</i></a>
       </div>
     </div>
   </f7-popup>

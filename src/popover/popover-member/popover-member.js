@@ -1,13 +1,17 @@
 import Events from "../../services/events";
 import { mapGetters } from "vuex";
 
-export default{
+export default {
+  data: function () {
+    return {}
+  },
   computed: mapGetters({
     member: "getSelectedMember"
   }),
   methods: {
-    onClosed() {
-      Events.publish("Popover:closed");
+    deleteMember() {
+      this.$store.dispatch("deleteMember", this.member);
+      this.$f7.closeModal();
     }
   }
 }

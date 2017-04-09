@@ -1,6 +1,7 @@
 // Import Vue
 import Vue from 'vue'
 
+import jquery from 'jquery'
 // Import F7
 import Framework7 from 'framework7'
 

@@ -1,0 +1,32 @@
+@import "../../css/constants.scss";
+.popup.popup-member-details {
+  .navbar {
+    .navbar-inner {
+      padding: 0px;
+      .left {
+        .f7-icons {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .popover-content {
+    .list-block {
+      ul {
+        li {
+          .item-content {
+            .item-inner {
+              margin: 0px;
+              .item-lable {
+                padding: 0px;
+              }
+              .item-input {
+                margin: 0px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
