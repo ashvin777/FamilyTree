@@ -21,12 +21,12 @@
           <li>
             <a href="#" class="fb-friend open-popup" v-for="contact in filteredContacts" @click="selectContact(contact)" data-popup=".popup-member-details">
               <div>
-                <div class="fb-friend-name">{{contact.title.$t}}</div>
-                <div class="fb-friend-email" v-for="email in contact.gd$email">
-                  Email: {{email.address}}
+                <div class="fb-friend-name">{{contact.name}}</div>
+                <div class="fb-friend-email" v-show="contact.email">
+                  Email: {{contact.email}}
                 </div>
-                <div class="fb-friend-contact" v-for="phone in contact.gd$phoneNumber">
-                  <span v-if="phone.label">{{phone.label}}:</span> {{phone.$t}}
+                <div class="fb-friend-contact" v-show="contact.phoneNumber">
+                  Mobile: {{contact.phoneNumber}}
                 </div>
               </div>
             </a>
@@ -36,7 +36,9 @@
     </div>
     <div class="toolbar">
       <div class="toolbar-inner">
-        <a href="#" class="link">Add Contact Manually <i class="f7-icons">right</i></a>
+        <f7-button class="button button-round utton-fill open-popup" data-popup=".popup-member-details" @click="addMemberManually()">
+          Add Contact Manually <i class="f7-icons">right</i>
+        </f7-button>
       </div>
     </div>
   </f7-popup>

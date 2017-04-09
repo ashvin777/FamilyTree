@@ -22,7 +22,6 @@ export default {
     };
     gapi.auth.authorize(config, function () {
       self.token = gapi.auth.getToken();
-      console.log(self.token);
       success(self.token);
     });
   },

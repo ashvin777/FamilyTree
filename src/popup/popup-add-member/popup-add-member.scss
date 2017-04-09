@@ -33,12 +33,19 @@
    width: 100%;
    font-size: 14px;
    text-align: center;
+   background: white;
    .link{
      width: 100%;
    }
    .f7-icons{
-     padding-left: 15px;
+     padding-left: 10px;
      font-size: 16px;
+   }
+   .button{
+     padding-left:20px;
+     padding-right: 20px;
+     background: $NavbarBg;
+     margin: auto;
    }
  }
  .fb-friend {

@@ -32,3 +32,4 @@ export const ADD_SPOUSE = "ADD_SPOUSE";
 export const ADD_BROTHER = "ADD_BROTHER";
 export const ADD_PARENT = "ADD_PARENT";
 export const DELETE_MEMBER = "DELETE_MEMBER";
+export const UPDATE_MEMBER_PROPERTY = "UPDATE_MEMBER_PROPERTY";

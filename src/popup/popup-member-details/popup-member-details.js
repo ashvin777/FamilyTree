@@ -11,8 +11,8 @@ export default {
     "selectedMember": "getSelectedMember"
   }),
   methods: {
-    addEmailAddress(email) {
-      this.$store.dispatch("addEmailAddress", email);
+    updateProperty(prop, value) {
+      this.$store.dispatch("updateMemberProperty", { prop, value });
     },
     addPhoneNumber(phone) {
       this.$store.dispatch("addPhoneNumber", phone);

@@ -9,11 +9,11 @@
       <span class="login-status" v-if="googleStatus == 'login:connected' && (contacts.length == 0 || !profile)">Loading Profile and Friends Details...</span>
       <span class="login-status" v-if="googleStatus == 'login:connected' && contacts.length > 0 && profile">Loading Dashboard...</span>
   
-      <f7-button @click="loginGoogle" v-show="googleStatus == 'sdk:loaded'" class="button button-round color-blue button-fill">
-        Continue with Google
+      <f7-button @click="loginGoogle" v-show="googleStatus == 'sdk:loaded'" class="button button-round button-fill">
+        <i class="f7-icons">social_googleplus</i> Continue with Google
       </f7-button>
 
-      <f7-button @click="loginGoogle" v-show="googleStatus == 'login:not_authorized'" class="button button-round color-blue button-fill">
+      <f7-button @click="loginGoogle" v-show="googleStatus == 'login:not_authorized'" class="button button-round button-fill">
         Try Again
       </f7-button>
     </div>

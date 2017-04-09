@@ -75,7 +75,15 @@ const mutations = {
     state.contacts = [];
   },
   [types.LOAD_GOOGLE_FRIENDS_SUCCESS](state, contacts) {
-    state.contacts = contacts.feed.entry;
+    var entries = [];
+    contacts.feed.entry.forEach((contact) => {
+      entries.push({
+        name: contact.title ? contact.title.$t : "",
+        email: contact.gd$email ? contact.gd$email[0].address : '',
+        phoneNumber: contact.gd$phoneNumber ? contact.gd$phoneNumber[0].$t : ''
+      });
+    });
+    state.contacts = entries;
   },
   [types.LOAD_GOOGLE_FRIENDS_FAILURE]() {
     state.contacts = [];
@@ -85,14 +93,14 @@ const mutations = {
   },
   [types.LOAD_GOOGLE_PROFILE_SUCCESS](state, profile) {
     state.profile = {
-      name : profile.displayName,
+      name: profile.displayName,
       email: profile.emails[0].value,
       gender: profile.gender,
       image: profile.image.url,
       occupation: profile.occupation,
       dateOfBirth: null,
       spouseId: null,
-      googleId : profile.id
+      googleId: profile.id
     };
   },
   [types.LOAD_GOOGLE_PROFILE_FAILURE]() {

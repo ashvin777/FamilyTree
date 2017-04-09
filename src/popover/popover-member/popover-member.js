@@ -12,6 +12,9 @@ export default {
     deleteMember() {
       this.$store.dispatch("deleteMember", this.member);
       this.$f7.closeModal();
+    },
+    editMember(){
+      this.$store.dispatch("setSelectedNewMember", this.member);
     }
   }
 }

@@ -1,34 +1,41 @@
 @import "../../css/constants.scss";
 .page {
- &.home {
-  padding: 10px;
-  font-family: $FontFamily;
-  background: $PageBackgroundColor;
-  color: $PageFontColor;
-  text-align: center;
-  .page-content {
-   padding: 0px;
-   position: relative;
-   .home-section {
+  &.home {
+    padding: 10px;
+    font-family: $FontFamily;
+    background: $PageBackgroundColor;
+    color: $PageFontColor;
     text-align: center;
-    padding-top: 100px;
-    h1 {
-     font-weight: 300;
-     font-size: 34px;
+    .page-content {
+      padding: 0px;
+      position: relative;
+      .home-section {
+        text-align: center;
+        padding-top: 100px;
+        h1 {
+          font-weight: 300;
+          font-size: 34px;
+        }
+        .app-logo {
+          max-width: 500px;
+          width: 90%;
+        }
+        .button {
+          width: 260px;
+          margin: auto;
+          font-size: 16px;
+          background: $NavbarBg;
+          .f7-icons {
+            padding-top: 6px;
+            vertical-align: top;
+            font-size: 22px;
+          }
+        }
+        .login-status {
+          margin-bottom: 30px;
+          display: inline-block;
+        }
+      }
     }
-    .app-logo {
-     max-width: 500px;
-     width: 90%;
-    }
-    .button {
-     width: 200px;
-     margin: auto;
-    }
-    .login-status {
-     margin-bottom: 30px;
-     display: inline-block;
-    }
-   }
   }
- }
 }

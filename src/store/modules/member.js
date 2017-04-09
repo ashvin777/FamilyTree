@@ -34,6 +34,9 @@ const actions = {
   },
   deleteMember({ commit, state }, member) {
     commit(types.DELETE_MEMBER, member);
+  },
+  updateMemberProperty({ commit, state }, obj) {
+    commit(types.UPDATE_MEMBER_PROPERTY, obj);
   }
 }
 
@@ -47,9 +50,9 @@ const mutations = {
   },
   [types.SET_SELECTED_NEW_MEMBER](state, member) {
     member = {
-      name: member.title.$t,
-      email: member.gd$email ? member.gd$email : { address: '' },
-      phoneNumber: member.gd$phoneNumber ? member.gd$phoneNumber : { $t: '' }
+      name: member.name,
+      email: member.email,
+      phoneNumber: member.phoneNumber
     };
     state.selectedNewMember = member;
   },
@@ -74,6 +77,9 @@ const mutations = {
     member.id = new Date().getTime();
     obj.partners.push(member);
     state.selectedParent.children.push(obj);
+  },
+  [types.UPDATE_MEMBER_PROPERTY](state, obj) {
+    state.selectedNewMember[obj.prop] = obj.value;
   },
   [types.DELETE_MEMBER](state, member) {
     if (state.selectedParent) {

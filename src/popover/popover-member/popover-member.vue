@@ -13,7 +13,7 @@
         <div class="mobile">Mobile : 8805194648</div>
         <div class="email">Email : ashvin.suthar777@gmail.com</div>
         <div class="buttons">
-          <a href="#" class="button button-raised button-fill color-pink">
+          <a href="#" class="button button-raised button-fill color-pink open-popup close-popover" data-popup=".popup-member-details" @click="editMember()">
             <i class="f7-icons">compose_fill</i> Edit
           </a>
           <a href="#" class="button button-raised button-fill color-pink open-popup close-popover" data-popup=".popup-add-member">

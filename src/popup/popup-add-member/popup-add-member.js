@@ -14,7 +14,7 @@ export default {
       let self = this;
       if (this.$store.state.google.contacts)
         return this.$store.state.google.contacts.filter(function (contact) {
-          return contact.title.$t.toLowerCase().match(self.query.toLowerCase());
+          return contact.name.toLowerCase().match(self.query.toLowerCase());
         });
     }
   },
@@ -22,8 +22,11 @@ export default {
     addMember(member) {
       this.$store.dispatch("addChild", member);
     },
-    selectContact(contact){
+    selectContact(contact) {
       this.$store.dispatch("setSelectedNewMember", contact);
+    },
+    addMemberManually() {
+      this.$store.dispatch("setSelectedNewMember", {});
     }
   }
 }
