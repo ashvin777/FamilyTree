@@ -22,7 +22,7 @@ export default {
     this.onResetClick();
     this.$store.dispatch("loadTreeData", this.profile);
     this.$store.watch(function(){
-      self.$store.dispatch("saveTreeDataInStorage");
+      self.$store.dispatch("saveTreeDataInStorage", self.profile);
     });
   },
   methods: {

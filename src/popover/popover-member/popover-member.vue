@@ -1,15 +1,13 @@
 <template>
   <f7-popover class="popover-member" v-if="member != null">
     <div class="header">
-      <div class="image" v-if="!member.image" v-bind:style=" { backgroundImage: 'url(\'http://graph.facebook.com/'+member.id+'/picture?type=square&height=400\')' }"></div>
       <div class="image" v-if="member.image" v-bind:style=" { backgroundImage: 'url(\''+member.image + '?access_token=' + token +'\')' }"></div>
       <div class="title">{{member.name}}</div>
     </div>
-    <div class="gender">Gender : Male</div>
-    <div class="marriage">Single/Married : Married</div>
-    <div class="birth">Birth Date : 11<sup>th</sup> Feb 1989</div>
-    <div class="mobile">Mobile : 8805194648</div>
-    <div class="email">Email : ashvin.suthar777@gmail.com</div>
+    <div class="gender" v-show="member.gender">Gender : {{member.gender}}</div>
+    <div class="birth"  v-show="member.dob">Birth Date : {{member.dob}}</div>
+    <div class="mobile"  v-show="member.phoneNumber">Mobile : {{member.phoneNumber}}</div>
+    <div class="email"  v-show="member.email">Email : {{member.email}}</div>
     <div class="buttons">
       <a href="#" class="button button-raised button-fill color-pink open-popup close-popover" data-popup=".popup-member-details" @click="editMember()">
         <i class="icon material-icons">mode_edit</i> Edit

@@ -111,6 +111,7 @@ const mutations = {
       dateOfBirth: null,
       spouseId: null,
       googleId: profile.id,
+      id: profile.id,
       root: true
     };
   },

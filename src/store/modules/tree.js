@@ -9,17 +9,21 @@ const getters = {
 }
 
 const actions = {
-  loadTreeData({ commit, state }, profile){
+  loadTreeData({ commit, state }, profile) {
     commit(types.LOAD_TREE_DATA);
-    var treeData = JSON.parse(localStorage.getItem("TREE_DATA"));
-    if(treeData){
-      commit(types.LOAD_TREE_DATA_SUCCESS, { treeData });
-    } else{
+    firebase.database().ref('/treeData/' + profile.googleId).once('value').then(function (snapshot) {
+      if (snapshot.val()) {
+        var treeData = snapshot.val();
+        commit(types.LOAD_TREE_DATA_SUCCESS, treeData);
+      } else {
+        commit(types.LOAD_TREE_DATA_FAILURE, profile);
+      }
+    }, function () {
       commit(types.LOAD_TREE_DATA_FAILURE, profile);
-    }
+    });
   },
-  saveTreeDataInStorage({ commit, state}){
-    commit(types.SAVE_TREE_DATA_ON_CHANGE);
+  saveTreeDataInStorage({ commit, state }, profile) {
+    commit(types.SAVE_TREE_DATA_ON_CHANGE, profile);
   },
   addParent({ commit, state }, member) {
     commit(types.ADD_PARENT, member);
@@ -27,26 +31,34 @@ const actions = {
 }
 
 const mutations = {
-  [types.LOAD_TREE_DATA](state, treeData){
+  [types.LOAD_TREE_DATA](state, treeData) {
     state.treeData = null;
   },
-  [types.LOAD_TREE_DATA_SUCCESS](state, treeData){
-    state.treeData = treeData.treeData;
+  [types.LOAD_TREE_DATA_SUCCESS](state, treeData) {
+    if (!treeData.children) {
+      treeData.children = [];
+    }
+    state.treeData = treeData;
   },
-  [types.LOAD_TREE_DATA_FAILURE](state, profile){
+  [types.LOAD_TREE_DATA_FAILURE](state, profile) {
     state.treeData = {};
     state.treeData.partners = [];
     state.treeData.children = [];
+    state.treeData.id = new Date().getTime();
+    profile.id = profile.googleId || new Date().getTime();
     state.treeData.partners.push(profile);
-    localStorage.setItem("TREE_DATA", JSON.stringify(state.treeData));
   },
-  [types.SAVE_TREE_DATA_ON_CHANGE](state){
-    localStorage.setItem("TREE_DATA", JSON.stringify(state.treeData));
+  [types.SAVE_TREE_DATA_ON_CHANGE](state, profile) {
+    if (state.treeData && profile.id) {
+      setTimeout(function () {
+       firebase.database().ref('/treeData/' + profile.id).set(state.treeData);
+      });
+    }
   },
-  [types.ADD_PARENT](state, member){
+  [types.ADD_PARENT](state, member) {
     state.treeData = {
       id: new Date().getTime(),
-      children : [state.treeData],
+      children: [state.treeData],
       partners: []
     };
     member.id = new Date().getTime();

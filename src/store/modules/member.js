@@ -61,6 +61,9 @@ const mutations = {
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
     obj.partners.push(member);
+    if( !state.selectedNode.children){
+      state.selectedNode.children = [];
+    }
     state.selectedNode.children.push(obj);
   },
   [types.ADD_SPOUSE](state, member) {
@@ -74,6 +77,9 @@ const mutations = {
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
     obj.partners.push(member);
+    if( !state.selectedNode.children){
+      state.selectedNode.children = [];
+    }
     state.selectedParent.children.push(obj);
   },
   [types.UPDATE_MEMBER_PROPERTY](state, obj) {
