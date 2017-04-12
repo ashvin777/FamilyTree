@@ -4,13 +4,15 @@ import * as types from '../mutation-types'
 const state = {
   googleStatus: "",
   contacts: [],
-  profile: null
+  profile: null,
+  token: null
 }
 
 const getters = {
   getContacts: state => state.contacts,
   getGoogleStatus: state => state.googleStatus,
-  getProfile: state => state.profile
+  getProfile: state => state.profile,
+  getAccessToken: state => state.token
 }
 
 const actions = {
@@ -66,6 +68,7 @@ const mutations = {
     state.googleStatus = "login:loading";
   },
   [types.GOOGLE_LOGIN_SUCCESS](state, status) {
+    state.token = status.access_token;
     state.googleStatus = "login:" + (status.access_token ? "connected" : "failed");
   },
   [types.GOOGLE_LOGIN_FAILURE](state) {
@@ -77,10 +80,17 @@ const mutations = {
   [types.LOAD_GOOGLE_FRIENDS_SUCCESS](state, contacts) {
     var entries = [];
     contacts.feed.entry.forEach((contact) => {
+      var image = null;
+      contact.link.forEach(function(link){
+        if( link.type == "image/*" ){
+          image = link.href;
+        }
+      });
       entries.push({
         name: contact.title ? contact.title.$t : "",
         email: contact.gd$email ? contact.gd$email[0].address : '',
-        phoneNumber: contact.gd$phoneNumber ? contact.gd$phoneNumber[0].$t : ''
+        phoneNumber: contact.gd$phoneNumber ? contact.gd$phoneNumber[0].$t : '',
+        image: image
       });
     });
     state.contacts = entries;
@@ -100,7 +110,8 @@ const mutations = {
       occupation: profile.occupation,
       dateOfBirth: null,
       spouseId: null,
-      googleId: profile.id
+      googleId: profile.id,
+      root: true
     };
   },
   [types.LOAD_GOOGLE_PROFILE_FAILURE]() {

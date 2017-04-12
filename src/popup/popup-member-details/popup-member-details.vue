@@ -20,7 +20,7 @@
               <div class="item-inner">
                 <div class="item-title label">Name</div>
                 <div class="item-input">
-                  <input type="text" placeholder="Your name" :value="selectedNewMember.name" @keydown="updateProperty('name', $event.target.value)">
+                  <input type="text" placeholder="Your name" :value="selectedNewMember.name" @keyup="updateProperty('name', $event.target.value)">
                 </div>
               </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="item-title label">E-mail</div>
                 <div class="item-input">
                   <!--<div v-for="(email, index) in selectedNewMember.email">-->
-                  <input type="email" placeholder="E-mail" @keydown="updateProperty('email', $event.target.value)" :value="selectedNewMember.email"></input>
+                  <input type="email" placeholder="E-mail" @keyup="updateProperty('email', $event.target.value)" :value="selectedNewMember.email"></input>
                   <!--</div>-->
                 </div>
               </div>
@@ -45,7 +45,7 @@
                 <div class="item-title label">Phone</div>
                 <div class="item-input">
                   <!--<div v-for="(number, index) in selectedNewMember.phoneNumber">-->
-                  <input type="tel" placeholder="Phone" @keydown="updateProperty('phoneNumber', $event.target.value)" :value="selectedNewMember.phoneNumber">
+                  <input type="tel" placeholder="Phone" @keyup="updateProperty('phoneNumber', $event.target.value)" :value="selectedNewMember.phoneNumber">
                 </div>
                 <!--</div>-->
               </div>
@@ -76,7 +76,7 @@
               </div>
             </div>
           </li>
-          <li>
+          <li v-show="!selectedNewMember.id">
             <div class="item-content">
               <div class="item-media"><i class="icon f7-icons">persons</i></div>
               <div class="item-inner">
@@ -98,7 +98,7 @@
   
     <div class="toolbar">
       <div class="toolbar-inner">
-        <f7-button class="button button-round utton-fill close-popup" @click="addRelative(selectedNewMember)">
+        <f7-button class="button button-round utton-fill close-popup" @click="addRelative()">
           Save Contact
         </f7-button>
       </div>

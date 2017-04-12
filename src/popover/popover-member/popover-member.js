@@ -5,15 +5,19 @@ export default {
   data: function () {
     return {}
   },
-  computed: mapGetters({
-    member: "getSelectedMember"
-  }),
+  computed: {
+    member() {
+      return this.$store.state.member.selectedMember;
+    },
+    token() {
+      return this.$store.state.google.token;
+    }
+  },
   methods: {
     deleteMember() {
       this.$store.dispatch("deleteMember", this.member);
-      this.$f7.closeModal();
     },
-    editMember(){
+    editMember() {
       this.$store.dispatch("setSelectedNewMember", this.member);
     }
   }

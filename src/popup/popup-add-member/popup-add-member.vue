@@ -9,7 +9,7 @@
     <div class="popover-content">
       <div class="list-block">
         <ul>
-          <li>
+          <li> 
             <div class="fb-friend fb-friend-input">
               <div>
                 <div class="item-input">
@@ -37,7 +37,7 @@
     <div class="toolbar">
       <div class="toolbar-inner">
         <f7-button class="button button-round utton-fill open-popup" data-popup=".popup-member-details" @click="addMemberManually()">
-          Add Contact Manually <i class="f7-icons">right</i>
+          Add Contact Manually <i class="icon material-icons">keyboard_arrow_right</i>
         </f7-button>
       </div>
     </div>

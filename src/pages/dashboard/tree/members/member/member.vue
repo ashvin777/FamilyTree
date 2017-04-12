@@ -1,10 +1,12 @@
 <template>
   <f7-card>
-    <!--<f7-card-header no-border v-if="!member.picture" v-bind:style=" { backgroundImage: 'url(\'http://graph.facebook.com/'+member.id+'/picture?type=square&height=400\')' }" class="popover-member open-popover" @click.native="openMemberPopover(member)">
+    <f7-card-header no-border class="popover-member open-popover" @click.native="openMemberPopover(member)">
+      <div class="image" v-if="!member.root" :style=" { backgroundImage: 'url(\''+member.image + '?access_token=' + token +'\')' }"></div>
+      <div class="image" v-if="member.root" :style=" { backgroundImage: 'url(\''+member.image + '&sz=100' +'\')' }"></div>
+      <img class="image placeholder" src="../../../../../css/img/man.png">
+
       <div class="title">{{member.name}}</div>
-    </f7-card-header>-->
-    <f7-card-header no-border v-bind:style=" { backgroundImage: 'url()' }" class="popover-member open-popover" @click.native="openMemberPopover(member)">
-      <div class="title">{{member.name}}</div>
+      <div class="age">Age: 56 Years</div>
     </f7-card-header>
     <f7-card-footer>
       <a href="#" @click="toggle()">

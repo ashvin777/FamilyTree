@@ -34,15 +34,6 @@ export default {
       data: self.token
     }).done(success).fail(failure);
   },
-  getContactPhoto: function(contact, success, failure){
-    let self = this;
-    var url = this.endpoint + "/photos/media/default/"+contact.id;
-    $.ajax({
-      url: url,
-      methods: "GET",
-      data: { access_token : self.token.access_token }
-    }).done(success).fail(failure);
-  },
   getProfile: function (success, failure) {
     let self = this;
     var url = "https://www.googleapis.com/plus/v1/people/me";
