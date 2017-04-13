@@ -105,9 +105,8 @@ const mutations = {
     state.profile = {
       name: profile.displayName,
       email: profile.emails[0].value,
-      gender: profile.gender,
+      gender: '',
       image: profile.image.url,
-      occupation: profile.occupation,
       dateOfBirth: null,
       spouseId: null,
       googleId: profile.id,
