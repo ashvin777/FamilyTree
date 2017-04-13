@@ -10,7 +10,8 @@ export default {
   },
   data() {
     return {
-      zoom: 1
+      zoom: 1,
+      view: "large"
     }
   },
   computed: mapState({
@@ -30,9 +31,6 @@ export default {
     let self = this;
     this.onResetClick();
     this.$store.dispatch("loadTreeData", this.profile);
-    // this.$store.watch(function(){
-    //   self.$store.dispatch("saveTreeDataInStorage", self.profile);
-    // });
   },
   methods: {
     onResetClick() {
@@ -51,6 +49,9 @@ export default {
         return;
       }
       this.zoom = this.zoom - 0.2;
+    },
+    toggleView() {
+      this.view = (this.view == "large") ? "small" : "large";
     }
   }
 }

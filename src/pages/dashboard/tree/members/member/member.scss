@@ -55,7 +55,6 @@
     }
     .card-footer {
       padding: 0 7px;
-      background: #1b1b1b;
       margin-top: -1px;
       min-height: 0px;
       &::before {
@@ -185,7 +184,7 @@
           width: 50%;
           height: 50%;
           float: left;
-          margin:auto;
+          margin: auto;
           border-radius: 0px;
           background: none!important;
           box-shadow: none;
@@ -194,6 +193,51 @@
           color: white;
           font-size: 20px;
           line-height: 55px;
+        }
+      }
+    }
+  }
+}
+
+.tree {
+  .small {
+    .node {
+      width: 100px;
+      .card.flip-container {
+        min-height: 76px;
+        .flipper {
+          width: 100%;
+          height: 76px;
+          .front {
+            width: 100px;
+            .image {
+              display: none;
+            }
+            .title {
+              padding: 0px;
+              text-align: center;
+              font-size: 14px;
+            }
+            .age{
+              display: none;
+            }
+            .card-header{
+              padding: 8px;
+              text-align: center;
+              height: 46px;
+              overflow: auto;
+            }
+          }
+          .back{
+            .buttons{
+              .button{
+                min-width: 0;
+                i{
+                  line-height: 20px;
+                }
+              }
+            }
+          }
         }
       }
     }

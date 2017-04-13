@@ -1,7 +1,7 @@
 <template>
   <div class="tree">
-    <toolbar @reset=" onResetClick " @zoomIn="onZoomInClick " @zoomOut="onZoomOutClick "></toolbar>
-    <ul v-bind:style="{ transform: 'scale('+zoom+ ')' } ">
+    <toolbar @reset=" onResetClick " @zoomIn="onZoomInClick " @zoomOut="onZoomOutClick" @toggleView="toggleView"></toolbar>
+    <ul v-bind:style="{ transform: 'scale('+zoom+ ')' } " :class="view">
       <members :model="treeData" v-if="treeData"></members>
     </ul>
   </div>
