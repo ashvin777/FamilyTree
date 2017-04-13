@@ -32,6 +32,20 @@ export default {
       if (this.isFolder) {
         this.open = !this.open
       }
+    },
+    deleteMember() {
+      this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
+      this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
+      this.$store.dispatch("deleteMember", this.member);
+    },
+    editMember() {
+      this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
+      this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
+      this.$store.dispatch("setSelectedNewMember", this.member);
+    },
+    addMember(){
+      this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
+      this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
     }
   }
 }

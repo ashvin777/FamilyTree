@@ -2,13 +2,13 @@
   .card {
     margin: 0;
     background: none;
-    border-radius: 10px;
-    overflow: hidden;
+    // overflow: hidden;
     display: inline-block;
     width: 100%;
-    background: #1b1b1b;
+    // background: #1b1b1b;
     min-height: 111px;
     max-height: 111px;
+    box-shadow: none;
     .card-header {
       padding: 10px;
       background-size: cover;
@@ -24,9 +24,9 @@
         float: right;
         position: relative;
         z-index: 2;
-        &.placeholder{
+        &.placeholder {
           position: absolute;
-          right:10px;
+          right: 10px;
           z-index: 1;
         }
       }
@@ -119,6 +119,82 @@
         border-right: 1px solid #ccc;
         width: 0;
         height: 50%;
+      }
+    }
+  }
+}
+
+//@extend-elements
+//original selectors
+//.front, .back
+%extend_1 {
+  //Instead of the line below you could use @include backface-visibility($visibility)
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.flip-container {
+  //Instead of the line below you could use @include perspective($p)
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+  &:hover .flipper {
+    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+    transform: rotateY(180deg);
+  }
+  &.hover .flipper {
+    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+    transform: rotateY(180deg);
+  }
+  .flipper {
+    width: 180px;
+    height: 111px;
+    //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+    transition: 0.6s;
+    //Instead of the line below you could use @include transform-style($style)
+    transform-style: preserve-3d;
+    position: relative;
+    .front {
+      width: 100%;
+      height: 100%;
+      @extend %extend_1;
+      z-index: 2;
+      border-radius: 10px;
+      background: #1b1b1b;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+      //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+      transform: rotateY(0deg);
+    }
+    .back {
+      width: 100%;
+      height: 100%;
+      background: #1b1b1b;
+      @extend %extend_1;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+      //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+      transform: rotateY(180deg);
+      .buttons {
+        text-align: center;
+        height: 100%;
+        .button {
+          background: none;
+          // display: inline-block;
+          width: 50%;
+          height: 50%;
+          float: left;
+          margin:auto;
+          border-radius: 0px;
+          background: none!important;
+          box-shadow: none;
+        }
+        .icon {
+          color: white;
+          font-size: 20px;
+          line-height: 55px;
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 import toolbar from "./toolbar/toolbar.vue"
 import members from "./members/members.vue"
 
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -13,17 +13,26 @@ export default {
       zoom: 1
     }
   },
-  computed: mapGetters({
-    "profile" : "getProfile",
-    "treeData" : "getTreeData"
+  computed: mapState({
+    "profile": state => state.google.profile,
+    "treeData": state => state.tree.treeData
   }),
-  mounted(){
+  watch: {
+    treeData: {
+      handler() {
+        let self = this;
+        self.$store.dispatch("saveTreeDataInStorage", self.profile);
+      },
+      deep: true
+    }
+  },
+  mounted() {
     let self = this;
     this.onResetClick();
     this.$store.dispatch("loadTreeData", this.profile);
-    this.$store.watch(function(){
-      self.$store.dispatch("saveTreeDataInStorage", self.profile);
-    });
+    // this.$store.watch(function(){
+    //   self.$store.dispatch("saveTreeDataInStorage", self.profile);
+    // });
   },
   methods: {
     onResetClick() {

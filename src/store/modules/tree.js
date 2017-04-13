@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import Vue from 'vue';
 
 const state = {
   treeData: null
@@ -39,19 +40,20 @@ const mutations = {
       treeData.children = [];
     }
     state.treeData = treeData;
+    // Vue.set(state, 'treeData', treeData);
   },
   [types.LOAD_TREE_DATA_FAILURE](state, profile) {
-    state.treeData = {};
-    state.treeData.partners = [];
-    state.treeData.children = [];
-    state.treeData.id = new Date().getTime();
     profile.id = profile.googleId || new Date().getTime();
-    state.treeData.partners.push(profile);
+    state.treeData = {
+      partners: [profile],
+      children: [],
+      id: new Date().getTime()
+    }
   },
   [types.SAVE_TREE_DATA_ON_CHANGE](state, profile) {
     if (state.treeData && profile.id) {
       setTimeout(function () {
-       firebase.database().ref('/treeData/' + profile.id).set(state.treeData);
+        firebase.database().ref('/treeData/' + profile.id).set(state.treeData);
       });
     }
   },

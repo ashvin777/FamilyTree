@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import Vue from "vue";
 
 const state = {
   selectedMember: null,
@@ -65,6 +66,7 @@ const mutations = {
       state.selectedNode.children = [];
     }
     state.selectedNode.children.push(obj);
+    // Vue.set(state, 'selectedNode', state.selectedNode);
   },
   [types.ADD_SPOUSE](state, member) {
     member.id = new Date().getTime();
