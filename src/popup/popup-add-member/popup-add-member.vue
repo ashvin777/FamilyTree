@@ -19,7 +19,7 @@
             </div>
           </li>
           <li>
-            <a href="#" class="fb-friend open-popup" v-for="contact in filteredContacts" @click="selectContact(contact)" data-popup=".popup-member-details">
+            <a href="#" class="fb-friend" v-for="contact in filteredContacts" @click="selectContact(contact)">
               <div>
                 <div class="fb-friend-name">{{contact.name}}</div>
                 <div class="fb-friend-email" v-show="contact.email">

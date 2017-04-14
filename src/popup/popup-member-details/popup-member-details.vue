@@ -57,10 +57,10 @@
               <div class="item-inner">
                 <div class="item-title label">Gender</div>
                 <div class="item-input">
-                  <select>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                  </select>
+                  <select @change="updateProperty('gender', $event.target.value)">
+                                      <option value="m">Male</option>
+                                      <option value="f">Female</option>
+                                    </select>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
               <div class="item-inner">
                 <div class="item-title label">Birth date</div>
                 <div class="item-input">
-                  <input type="date" placeholder="Birth day" value="2014-04-30">
+                  <input type="date" placeholder="Birth day" value="2014-04-30" @change="updateProperty('dob', $event.target.value)">
                 </div>
               </div>
             </div>
@@ -83,11 +83,11 @@
                 <div class="item-title label">Relation</div>
                 <div class="item-input">
                   <select v-model="relation">
-                      <option value="children">Children</option>
-                      <option value="spouse">Spouse</option>
-                      <option value="brother">Brother</option>
-                      <option value="parent">Add Parent</option>
-                    </select>
+                        <option value="children">Children</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="brother">Brother</option>
+                        <option value="parent">Add Parent</option>
+                      </select>
                 </div>
               </div>
             </div>

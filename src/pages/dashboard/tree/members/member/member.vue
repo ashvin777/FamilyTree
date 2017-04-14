@@ -5,7 +5,8 @@
         <f7-card-header no-border class="popover-member">
           <div class="image" v-if="!member.root" :style=" { backgroundImage: 'url(\''+member.image + '?access_token=' + token +'\')' }"></div>
           <div class="image" v-if="member.root" :style=" { backgroundImage: 'url(\''+member.image + '&sz=100' +'\')' }"></div>
-          <img class="image placeholder" src="../../../../../css/img/man.png">
+          <img v-if="member.gender == 'm'" class="image placeholder" src="../../../../../css/img/man.png">
+          <img v-if="member.gender == 'f'" class="image placeholder" src="../../../../../css/img/woman.png">
   
           <div class="title">{{member.name}}</div>
           <div class="age">Age: 56 Years</div>
@@ -19,7 +20,7 @@
       </div>
       <div class="back">
         <div class="buttons">
-        <a href="#" class="button button-raised button-fill color-pink open-popover" data-popup=".popover-member" @click.native="openMemberPopover(member)">
+        <a href="#" class="button button-raised button-fill color-pink open-popover" data-popup=".popover-member" @click="openMemberPopover(member)">
             <i class="icon material-icons">remove_red_eye</i>
           </a>
           <a href="#" class="button button-raised button-fill color-pink open-popup" data-popup=".popup-member-details" @click="editMember()">
