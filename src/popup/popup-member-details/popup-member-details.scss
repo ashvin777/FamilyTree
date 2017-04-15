@@ -2,10 +2,17 @@
 .popup.popup-member-details {
   .navbar {
     .navbar-inner {
-      padding: 0px;
+      // padding: 0px;
       .left {
+        min-width: auto;
         .f7-icons {
           font-size: 20px;
+        }
+        a{
+          min-width: auto;
+          padding: 0px 5px;
+          width: auto;
+          margin-right: 20px;
         }
       }
     }
@@ -15,6 +22,7 @@
       ul {
         li {
           .item-content {
+            padding: 0 25px;
             .item-inner {
               margin: 0px;
               .item-lable {

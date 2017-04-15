@@ -21,6 +21,11 @@ export default {
   methods: {
     onOpenAction: function(open) {
       this.open = open;
+    },
+    toggle: function () {
+      if (this.isFolder) {
+        this.open = !this.open
+      }
     }
   }
 }

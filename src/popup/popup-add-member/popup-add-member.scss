@@ -1,89 +1,126 @@
 @import "../../css/constants.scss";
-.popup.popup-member{
- font-family: $FontFamily;
- height: 500px;
- position: absolute;
- top: 50%!important;
- margin-top: 0!important;
- @include css3("transform", "translate3d(0,0,0) translateY(-50%)!important");
- &.modal-out {
-  @include css3("transform", "translate3d(0,1px,0)");
-  opacity: 0;
-  display: none!important;
- }
- .navbar {
-  background: $NavbarBg;
-  .navbar-inner{
-    padding: 0 25px;
-    .center{
+.popup.popup-member {
+  font-family: $FontFamily;
+  height: auto;
+  position: absolute;
+  top: 50%!important;
+  margin-top: 0!important;
+  @include css3("transform", "translate3d(0,0,0) translateY(-50%)!important");
+  &.modal-out {
+    @include css3("transform", "translate3d(0,1px,0)");
+    opacity: 0;
+    display: none!important;
+  }
+  .navbar {
+    background: $NavbarBg;
+    .navbar-inner {
+      padding: 0 25px;
+      .center {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-left: 0px;
+      }
+    }
+  }
+  .popover-content {
+    height: calc( 100% - 56px);
+    overflow: auto;
+    .list-block {
+      margin: 0px;
+    }
+    .friends-scroller {
+      height: 400px;
+      overflow: auto;
+    }
+  }
+  .toolbar {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    background: white;
+    .link {
+      width: 100%;
+    }
+    .icon {
+      padding-left: 10px;
       font-size: 16px;
-      font-weight: 500;
-      text-transform: uppercase;
+      color: white;
+    }
+    .button {
+      padding-left: 20px;
+      padding-right: 20px;
+      background: $NavbarBg;
+      margin: auto;
     }
   }
- }
- .popover-content{
-   height: calc( 100% - 56px - 48px );
-   overflow: auto;
-   .list-block{
-     margin: 0px;
-   }
- }
- .toolbar{
-   width: 100%;
-   font-size: 14px;
-   text-align: center;
-   background: white;
-   .link{
-     width: 100%;
-   }
-   .icon{
-     padding-left: 10px;
-     font-size: 16px;
-     color: white;
-   }
-   .button{
-     padding-left:20px;
-     padding-right: 20px;
-     background: $NavbarBg;
-     margin: auto;
-   }
- }
- .fb-friend {
-  display: inline-block;
-  width: 100%;
-  padding: 0 25px;
-  vertical-align: top;
-  color: black;
-  >div {
-   padding: 10px 0;
-   border-bottom: 1px solid #dfdfdf;
-  }
-  &.fb-friend-input{
-    padding-top: 10px;
-    >div{
-      padding: 0px;
-      border: 0px;
+  .fb-friend {
+    display: inline-block;
+    width: 100%;
+    padding: 0 25px;
+    vertical-align: top;
+    color: black;
+    box-sizing: border-box;
+    >div {
+      padding: 10px 0;
+      border-bottom: 1px solid #dfdfdf;
+    }
+    i {
+      position: absolute;
+      right: 18px;
+      color: #dfdfdf;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &.fb-friend-input {
+      padding-top: 10px;
+      border-bottom: 1px solid #dfdfdf;
+      >div {
+        padding: 0px;
+        border: 0px;
+      }
+    }
+    position: relative;
+    .f7-icons {
+      position: absolute;
+      top: 20px;
+      left: 38px;
+      line-height: 50px;
+      width: 50px;
+      border-radius: 100%;
+      color: rgba(255, 255, 255, 0);
+      font-size: 22px;
+    }
+    .f7-icons:hover {
+      background: rgba(0, 0, 0, 0.5);
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .fb-friend-email,
+    .fb-friend-contact {
+      font-size: 12px;
+      color: gray;
     }
   }
-  position: relative;
-  .f7-icons {
-   position: absolute;
-   top: 20px;
-   left: 38px;
-   line-height: 50px;
-   width: 50px;
-   border-radius: 100%;
-   color: rgba(255, 255, 255, 0);
-   font-size: 22px;
+}
+
+@media only screen and (max-width: 636px) {
+  .popup.popup-member {
+    width: 100%;
+    height: 100%;
+    top: 0px!important;
+    transform: none!important;
+    max-height: 100%;
+    .popover-content {
+      .list-block {
+        height: 100%;
+        ul {
+          height: 100%;
+          .friends-scroller {
+            height: calc( 100% - 50px);
+            max-height: 100%;
+          }
+        }
+      }
+    }
   }
-  .f7-icons:hover {
-   background: rgba(0, 0, 0, 0.5);
-   color: rgba(255, 255, 255, 0.4);
-  }
-  .fb-friend-email, .fb-friend-contact {
-   font-size: 12px;
-   color: gray;
-  }
- }
 }

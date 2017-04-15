@@ -16,11 +16,23 @@ export default {
     },
     token() {
       return this.$store.state.google.token;
+    },
+    age() {
+      var dob = new Date(this.member.dob);
+      var ageDifMs = Date.now() - dob.getTime();
+      var ageDate = new Date(ageDifMs); // miliseconds from epoch
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
   },
   watch: {
     open: function () {
       this.$emit("open-action", this.open);
+    },
+    member: {
+      handler() {
+        console.log("Member details changed");
+      },
+      deep: true
     }
   },
   methods: {
@@ -43,7 +55,7 @@ export default {
       this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
       this.$store.dispatch("setSelectedNewMember", this.member);
     },
-    addMember(){
+    addMember() {
       this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
       this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
     }

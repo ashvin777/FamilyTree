@@ -1,0 +1,19 @@
+.tree {
+  .node{
+    position: relative;
+  }
+  li a.toggle {
+    position: absolute;
+    bottom: 5px;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    &.toggle-center {
+      // top: 67px;
+    }
+    .icon {
+      font-size: 25px;
+    }
+  }
+}

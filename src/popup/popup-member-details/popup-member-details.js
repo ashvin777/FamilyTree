@@ -14,7 +14,9 @@ export default {
     updateProperty(prop, value) {
       this.$store.dispatch("updateMemberProperty", { prop, value });
     },
-    addRelative() {
+    addRelative(event) {
+      event.preventDefault();
+      this.$store.dispatch("extendSelectedNewMember");
       if (this.selectedNewMember.id) {
         this.updateMember();
       } else {
@@ -26,9 +28,14 @@ export default {
           default: break;
         }
       }
+      this.$f7.closeModal();
     },
     updateMember(){
       this.$store.dispatch("updateSelectedMember", this.selectedNewMember);
+    },
+    openAddMemberPopup(){
+      this.$f7.closeModal();
+      this.$f7.popup(".popup-add-member");
     }
   }
 }

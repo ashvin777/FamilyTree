@@ -24,6 +24,9 @@ const actions = {
   setSelectedNewMember({ commit, state }, member) {
     commit(types.SET_SELECTED_NEW_MEMBER, member);
   },
+  extendSelectedNewMember({ commit, state }) {
+    commit(types.EXTEND_SELECTED_NEW_MEMBER);
+  },
   addChild({ commit, state }, member) {
     commit(types.ADD_CHILDREN, member);
   },
@@ -39,7 +42,7 @@ const actions = {
   updateMemberProperty({ commit, state }, obj) {
     commit(types.UPDATE_MEMBER_PROPERTY, obj);
   },
-  updateSelectedMember({ commit, state }, member){
+  updateSelectedMember({ commit, state }, member) {
     commit(types.UPDATE_EXISTING_MEMBER, member);
   }
 }
@@ -55,6 +58,20 @@ const mutations = {
   [types.SET_SELECTED_NEW_MEMBER](state, member) {
     state.selectedNewMember = member;
   },
+  [types.EXTEND_SELECTED_NEW_MEMBER](state){
+    var defaultMemberFields = {
+      name: '',
+      email: '',
+      gender: null,
+      image: null,
+      dob: null,
+      phoneNumber: '',
+      spouseId: null,
+      googleId: null,
+      id: null
+    }
+    Object.assign(defaultMemberFields, state.selectedNewMember);
+  },
   [types.ADD_CHILDREN](state, member) {
     var obj = {};
     obj.partners = [];
@@ -62,7 +79,7 @@ const mutations = {
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
     obj.partners.push(member);
-    if( !state.selectedNode.children){
+    if (!state.selectedNode.children) {
       state.selectedNode.children = [];
     }
     state.selectedNode.children.push(obj);
@@ -79,7 +96,7 @@ const mutations = {
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
     obj.partners.push(member);
-    if( !state.selectedNode.children){
+    if (!state.selectedNode.children) {
       state.selectedNode.children = [];
     }
     state.selectedParent.children.push(obj);
@@ -87,7 +104,7 @@ const mutations = {
   [types.UPDATE_MEMBER_PROPERTY](state, obj) {
     state.selectedNewMember[obj.prop] = obj.value;
   },
-  [types.UPDATE_EXISTING_MEMBER](state, member){
+  [types.UPDATE_EXISTING_MEMBER](state, member) {
     state.selectedMember = member;
   },
   [types.DELETE_MEMBER](state, member) {

@@ -29,6 +29,13 @@ export default {
     },
     addMemberManually() {
       this.$store.dispatch("setSelectedNewMember", {});
+    },
+    onPopupOpen() {
+      let self = this;
+      this.query = "";
+      setTimeout(function () {
+        self.$refs.contactsScroller.scrollTop = 0;
+      }, 1000);
     }
   }
 }

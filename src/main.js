@@ -15,6 +15,7 @@ import Framework7Vue from 'framework7-vue'
 import Framework7Theme from 'framework7/dist/css/framework7.material.min.css'
 import Framework7ThemeColors from 'framework7/dist/css/framework7.material.colors.min.css'
 
+import VeeValidate from 'vee-validate';
 
 // Import App Custom Styles
 import AppStyles from './css/app.css'
@@ -34,6 +35,8 @@ window.$ = $;
 
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue);
+Vue.use(VeeValidate);
+
 
 // Init App
 new Vue({
