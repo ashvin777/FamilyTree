@@ -2,24 +2,29 @@
   <f7-card class="flip-container">
     <div class="flipper">
       <div class="front">
-        <f7-card-header no-border class="popover-member">
+        <div class="image-container">
           <div class="image" v-if="!member.root" :style=" { backgroundImage: 'url(\''+member.image + '?access_token=' + token +'\')' }"></div>
           <div class="image" v-if="member.root" :style=" { backgroundImage: 'url(\''+member.image + '&sz=100' +'\')' }"></div>
-          <img v-if="member.gender != 'f'" class="image placeholder" src="../../../../../css/img/man.png">
-          <img v-if="member.gender == 'f'" class="image placeholder" src="../../../../../css/img/woman.png">
+          
+          <img v-if="member.gender != 'f' && !age" class="image placeholder" src="../../../../../css/img/man.png">
+          <img v-if="member.gender != 'f' && age <= 12" class="image placeholder" src="../../../../../css/img/boy.png">
+          <img v-if="member.gender != 'f' && age > 12 && age <= 50" class="image placeholder" src="../../../../../css/img/man.png">
+          <img v-if="member.gender != 'f' && age > 50" class="image placeholder" src="../../../../../css/img/old-man.png">
+
+          <img v-if="member.gender == 'f' && !age" class="image placeholder" src="../../../../../css/img/woman.png">
+          <img v-if="member.gender == 'f' && age <= 12" class="image placeholder" src="../../../../../css/img/girl.png">
+          <img v-if="member.gender == 'f' && age > 12 && age <= 50" class="image placeholder" src="../../../../../css/img/woman.png">
+          <img v-if="member.gender == 'f' && age > 50" class="image placeholder" src="../../../../../css/img/old-woman.png">
+        </div>
+        <f7-card-header no-border class="popover-member">
           <div class="title">{{member.name}}</div>
-          <div class="age">Age: {{age}}</div>
+          <div class="age" v-if="age <= 1">{{age}} Year</div>
+          <div class="age" v-if="age > 1">{{age}} Years</div>
         </f7-card-header>
-        <!--<f7-card-footer>
-          <a href="#" @click="toggle()">
-            <f7-icon v-if="isFolder && !open" material="arrow_drop_down"></f7-icon>
-            <f7-icon v-if="isFolder && open" material="arrow_drop_up"></f7-icon>
-          </a>
-        </f7-card-footer>-->
       </div>
       <div class="back">
         <div class="buttons">
-        <a href="#" class="button button-raised button-fill color-pink open-popover" data-popup=".popover-member" @click="openMemberPopover(member)">
+          <a href="#" class="button button-raised button-fill color-pink open-popover" data-popup=".popover-member" @click="openMemberPopover(member)">
             <i class="icon material-icons">remove_red_eye</i>
           </a>
           <a href="#" class="button button-raised button-fill color-pink open-popup" data-popup=".popup-member-details" @click="editMember()">

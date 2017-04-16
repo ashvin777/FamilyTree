@@ -1,6 +1,6 @@
 <template>
   <f7-popup class="popup-member-details popup-member modal-in" v-if="selectedNewMember">
-    <form name="memberDetailsForm" @submit="addRelative($event)" action="#dashboard">
+    <form name="memberDetailsForm" @submit="addRelative($event)">
       <f7-navbar>
         <f7-nav-left v-show="!selectedNewMember.id">
           <f7-link @click.native="openAddMemberPopup()">
@@ -78,7 +78,7 @@
                 </div>
               </div>
             </li>
-            <li v-show="!selectedNewMember.id">
+            <li v-if="!selectedNewMember.id">
               <div class="item-content">
                 <div class="item-media"><i class="material-icons icon">link</i></div>
                 <div class="item-inner">

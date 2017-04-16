@@ -18,10 +18,11 @@ export default {
       return this.$store.state.google.token;
     },
     age() {
-      var dob = new Date(this.member.dob);
-      var ageDifMs = Date.now() - dob.getTime();
-      var ageDate = new Date(ageDifMs); // miliseconds from epoch
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
+      var dob = this.member.dob;
+      var birthdate = new Date(dob);
+      var cur = new Date();
+      var diff = cur - birthdate;
+      return Math.floor(diff / 31536000000);
     }
   },
   watch: {
@@ -48,7 +49,13 @@ export default {
     deleteMember() {
       this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
       this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
-      this.$store.dispatch("deleteMember", this.member);
+
+      var parent = this.$store.state.member.selectedParent;
+      if (parent || this.model.partners.length > 1) {
+        this.$store.dispatch("deleteMember", this.member);
+      } else {
+        this.$store.dispatch("deleteTree", this.member);
+      }
     },
     editMember() {
       this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);

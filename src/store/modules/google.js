@@ -103,13 +103,13 @@ const mutations = {
   },
   [types.LOAD_GOOGLE_PROFILE_SUCCESS](state, profile) {
     state.profile = {
-      name: profile.displayName,
-      email: profile.emails[0].value,
+      name: profile.displayName ? profile.displayName : '',
+      email: profile.emails[0].value ? profile.emails[0].value: '', 
       gender: '',
-      image: profile.image.url,
+      image: profile.image.url ? profile.image.url : '',
       phoneNumber: '',
-      dob: null,
-      spouseId: null,
+      dob: '',
+      spouseId: '',
       googleId: profile.id,
       id: profile.id,
       root: true

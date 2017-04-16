@@ -52,6 +52,17 @@ export default {
     },
     toggleView() {
       this.view = (this.view == "large") ? "small" : "large";
+    },
+    add() {
+      var treeName = prompt("Give a name to your tree");
+      if (treeName) {
+        var root = confirm("Are you in the tree ?");
+        if (root) {
+          this.$store.dispatch("loadTreeRootProfile", { profile: this.profile, treeName });
+        } else {
+          //not in tree. Add friends as a root
+        }
+      }
     }
   }
 }

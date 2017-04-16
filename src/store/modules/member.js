@@ -11,7 +11,8 @@ const state = {
 const getters = {
   getSelectedMember: state => state.selectedMember,
   getSelectedNode: state => state.selectedNode,
-  getSelectedNewMember: state => state.selectedNewMember
+  getSelectedNewMember: state => state.selectedNewMember,
+  getSelectedParent: state => state.selectedParent
 }
 
 const actions = {
@@ -59,18 +60,17 @@ const mutations = {
     state.selectedNewMember = member;
   },
   [types.EXTEND_SELECTED_NEW_MEMBER](state){
-    var defaultMemberFields = {
-      name: '',
-      email: '',
-      gender: null,
-      image: null,
-      dob: null,
-      phoneNumber: '',
-      spouseId: null,
-      googleId: null,
-      id: null
-    }
-    Object.assign(defaultMemberFields, state.selectedNewMember);
+
+    Vue.set(state.selectedNewMember, "name", state.selectedNewMember.name || '');
+    Vue.set(state.selectedNewMember, "email", state.selectedNewMember.email || '');
+    Vue.set(state.selectedNewMember, "gender", state.selectedNewMember.gender || '');
+    Vue.set(state.selectedNewMember, "image", state.selectedNewMember.image || '');
+    Vue.set(state.selectedNewMember, "dob", state.selectedNewMember.dob || '');
+    Vue.set(state.selectedNewMember, "phoneNumber", state.selectedNewMember.phoneNumber || '');
+    Vue.set(state.selectedNewMember, "spouseId", state.selectedNewMember.spouseId || '');
+    Vue.set(state.selectedNewMember, "googleId", state.selectedNewMember.googleId || '');
+    Vue.set(state.selectedNewMember, "id", state.selectedNewMember.id || '');
+
   },
   [types.ADD_CHILDREN](state, member) {
     var obj = {};
@@ -80,10 +80,9 @@ const mutations = {
     member.id = new Date().getTime();
     obj.partners.push(member);
     if (!state.selectedNode.children) {
-      state.selectedNode.children = [];
+      Vue.set(state.selectedNode, "children" , []);
     }
     state.selectedNode.children.push(obj);
-    // Vue.set(state, 'selectedNode', state.selectedNode);
   },
   [types.ADD_SPOUSE](state, member) {
     member.id = new Date().getTime();
@@ -97,15 +96,17 @@ const mutations = {
     member.id = new Date().getTime();
     obj.partners.push(member);
     if (!state.selectedNode.children) {
-      state.selectedNode.children = [];
+      Vue.set(state.selectedNode, "children" , []);
     }
     state.selectedParent.children.push(obj);
   },
   [types.UPDATE_MEMBER_PROPERTY](state, obj) {
-    state.selectedNewMember[obj.prop] = obj.value;
+    // state.selectedNewMember[obj.prop] = obj.value;
+    Vue.set(state.selectedNewMember, obj.prop, obj.value);
   },
   [types.UPDATE_EXISTING_MEMBER](state, member) {
-    state.selectedMember = member;
+    Vue.set(state, "selectedMember", member);
+    // state.selectedMember = member;
   },
   [types.DELETE_MEMBER](state, member) {
     if (state.selectedParent) {
