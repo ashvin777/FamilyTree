@@ -18,6 +18,9 @@
     <f7-link @click.native="$emit('toggleListView')">
       <f7-icon material="list"></f7-icon>
     </f7-link>
+    <f7-link @click.native="$emit('deleteTree')">
+      <f7-icon material="delete"></f7-icon>
+    </f7-link>
   </f7-subnavbar>
 </template>
 

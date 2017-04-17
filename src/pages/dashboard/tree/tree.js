@@ -16,10 +16,11 @@ export default {
   },
   computed: mapState({
     "profile": state => state.google.profile,
-    "treeData": state => state.tree.treeData
+    "treeData": state => state.tree.treeData,
+    "trees" : state => state.tree.trees
   }),
   watch: {
-    treeData: {
+    trees: {
       handler() {
         let self = this;
         self.$store.dispatch("saveTreeDataInStorage", self.profile);

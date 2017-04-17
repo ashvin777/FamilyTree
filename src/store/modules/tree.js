@@ -16,7 +16,7 @@ const getters = {
 const actions = {
   loadTreeData({ commit, state }, profile) {
     commit(types.LOAD_TREE_DATA);
-    firebase.database().ref('/treeData/' + profile.googleId).on('value', function (snapshot) {
+    firebase.database().ref('/treeData/' + profile.googleId).once('value').then(function (snapshot) {
       if (snapshot.val()) {
         var treeData = snapshot.val();
         commit(types.LOAD_TREE_DATA_SUCCESS, treeData);
@@ -44,8 +44,8 @@ const actions = {
 
 const mutations = {
   [types.LOAD_TREE_DATA](state, treeName) {
-    //state.treeData = null;
-    //state.trees = null;
+    state.treeData = null;
+    state.trees = null;
   },
   [types.LOAD_TREE_DATA_SUCCESS](state, treeData) {
     state.trees = treeData;
@@ -69,12 +69,18 @@ const mutations = {
       children: [],
       id: new Date().getTime()
     }
-    state.trees[state.selectedTreeName] = state.treeData;
+    if( !state.trees ){
+      Vue.set(state, 'trees', {});
+      Vue.set(state.trees, state.selectedTreeName, state.treeData);
+    } else {
+      Vue.set(state.trees, state.selectedTreeName, state.treeData);
+    }
+    
   },
   [types.SAVE_TREE_DATA_ON_CHANGE](state, profile) {
-    if (state.treeData && profile.id) {
+    if (state.trees && profile.id) {
       setTimeout(function () {
-        firebase.database().ref('/treeData/' + profile.id + "/" + state.selectedTreeName).set(state.treeData);
+        firebase.database().ref('/treeData/' + profile.id).set(state.trees);
       });
     }
   },
