@@ -111,8 +111,9 @@ const mutations = {
       dob: '',
       spouseId: '',
       googleId: profile.id,
-      id: profile.id,
-      root: true
+      id: profile.emails[0].value.replace(/\./g, ""),
+      root: true,
+      parentId: ''
     };
   },
   [types.LOAD_GOOGLE_PROFILE_FAILURE]() {

@@ -1,7 +1,7 @@
 <template>
   <f7-card class="flip-container">
     <div class="flipper">
-      <div class="front">
+      <div class="front" :class="{ 'not-in-this-tree': !member.root && (member.parentId != parent.id)}">
         <div class="image-container">
           <div class="image" v-if="!member.root" :style=" { backgroundImage: 'url(\''+member.image + '?access_token=' + token +'\')' }"></div>
           <div class="image" v-if="member.root" :style=" { backgroundImage: 'url(\''+member.image + '&sz=100' +'\')' }"></div>
@@ -22,7 +22,7 @@
           <div class="age" v-if="age > 1">{{age}} Years</div>
         </f7-card-header>
       </div>
-      <div class="back">
+      <div class="back" :class="{ 'not-in-this-tree': !member.root && (member.parentId != parent.id)}">
         <div class="buttons">
           <a href="#" class="button button-raised button-fill color-pink open-popover" data-popup=".popover-member" @click="openMemberPopover(member)">
             <i class="icon material-icons">remove_red_eye</i>

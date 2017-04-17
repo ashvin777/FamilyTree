@@ -3,6 +3,9 @@
     <f7-link @click.native="$emit('add')">
       <f7-icon material="add"></f7-icon>
     </f7-link>
+    <f7-link @click.native="$emit('addRoot')">
+      <f7-icon material="person_add"></f7-icon>
+    </f7-link>
     <f7-link @click.native="$emit('reset')">
       <f7-icon material="filter_center_focus"></f7-icon>
     </f7-link>

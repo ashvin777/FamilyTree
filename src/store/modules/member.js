@@ -34,8 +34,8 @@ const actions = {
   addSpouse({ commit, state }, member) {
     commit(types.ADD_SPOUSE, member);
   },
-  addBrother({ commit, state }, member) {
-    commit(types.ADD_BROTHER, member);
+  addSibling({ commit, state }, member) {
+    commit(types.ADD_SIBLING, member);
   },
   deleteMember({ commit, state }, member) {
     commit(types.DELETE_MEMBER, member);
@@ -70,6 +70,7 @@ const mutations = {
     Vue.set(state.selectedNewMember, "spouseId", state.selectedNewMember.spouseId || '');
     Vue.set(state.selectedNewMember, "googleId", state.selectedNewMember.googleId || '');
     Vue.set(state.selectedNewMember, "id", state.selectedNewMember.id || '');
+    Vue.set(state.selectedNewMember, "parentId", state.selectedNewMember.parentId || '');
 
   },
   [types.ADD_CHILDREN](state, member) {
@@ -78,22 +79,26 @@ const mutations = {
     obj.children = [];
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
+    member.parentId = state.selectedNode.id;
     obj.partners.push(member);
     if (!state.selectedNode.children) {
       Vue.set(state.selectedNode, "children" , []);
     }
     state.selectedNode.children.push(obj);
+    Vue.set(state, 'selectedNode', state.selectedNode);
   },
   [types.ADD_SPOUSE](state, member) {
     member.id = new Date().getTime();
+    member.parentId = '';
     state.selectedNode.partners.push(member);
   },
-  [types.ADD_BROTHER](state, member) {
+  [types.ADD_SIBLING](state, member) {
     var obj = {};
     obj.partners = [];
     obj.children = [];
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
+    member.parentId = state.selectedParent.id;
     obj.partners.push(member);
     if (!state.selectedNode.children) {
       Vue.set(state.selectedNode, "children" , []);
@@ -101,12 +106,10 @@ const mutations = {
     state.selectedParent.children.push(obj);
   },
   [types.UPDATE_MEMBER_PROPERTY](state, obj) {
-    // state.selectedNewMember[obj.prop] = obj.value;
     Vue.set(state.selectedNewMember, obj.prop, obj.value);
   },
   [types.UPDATE_EXISTING_MEMBER](state, member) {
     Vue.set(state, "selectedMember", member);
-    // state.selectedMember = member;
   },
   [types.DELETE_MEMBER](state, member) {
     if (state.selectedParent) {

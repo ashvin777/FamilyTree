@@ -86,9 +86,9 @@
                   <div class="item-input">
                     <select v-model="relation" required>
                                 <option value="children">Children</option>
+                                <option value="sibling">Sibling</option>
                                 <option value="spouse">Spouse</option>
-                                <option value="brother">Brother</option>
-                                <option value="parent">Add Parent</option>
+                                <option value="parent">Parent</option>
                               </select>
                   </div>
                 </div>

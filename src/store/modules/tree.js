@@ -16,7 +16,7 @@ const getters = {
 const actions = {
   loadTreeData({ commit, state }, profile) {
     commit(types.LOAD_TREE_DATA);
-    firebase.database().ref('/treeData/' + profile.googleId).once('value').then(function (snapshot) {
+    firebase.database().ref('/treeData/' + profile.id).once('value').then(function (snapshot) {
       if (snapshot.val()) {
         var treeData = snapshot.val();
         commit(types.LOAD_TREE_DATA_SUCCESS, treeData);
@@ -31,13 +31,16 @@ const actions = {
   saveTreeDataInStorage({ commit, state }, profile) {
     commit(types.SAVE_TREE_DATA_ON_CHANGE, profile);
   },
+  attachTreeToMember({ commit, state }, email) {
+    commit(types.ATTACH_TREE_TO_MEMBER, email);
+  },
   addParent({ commit, state }, member) {
     commit(types.ADD_PARENT, member);
   },
   deleteTree({ commit, state }, profile) {
     commit(types.DELETE_TREE, profile);
   },
-  setTree({ commit, state }, treeName){
+  setTree({ commit, state }, treeName) {
     commit(types.SET_TREE, treeName);
   }
 }
@@ -63,24 +66,36 @@ const mutations = {
   },
   [types.LOAD_TREE_ROOT_PROFILE](state, { profile, treeName }) {
     state.selectedTreeName = treeName;
-    profile.id = profile.googleId || new Date().getTime();
+    profile.id = profile.id || new Date().getTime();
     state.treeData = {
       partners: [profile],
       children: [],
-      id: new Date().getTime()
+      id: profile.id
     }
-    if( !state.trees ){
+    if (!state.trees) {
       Vue.set(state, 'trees', {});
       Vue.set(state.trees, state.selectedTreeName, state.treeData);
     } else {
       Vue.set(state.trees, state.selectedTreeName, state.treeData);
     }
-    
+
   },
   [types.SAVE_TREE_DATA_ON_CHANGE](state, profile) {
     if (state.trees && profile.id) {
       setTimeout(function () {
         firebase.database().ref('/treeData/' + profile.id).set(state.trees);
+      });
+    }
+  },
+  [types.ATTACH_TREE_TO_MEMBER](state, email) {
+    if (email) {
+      email = email.replace(/\./g, "");
+      var ref = firebase.database().ref('/treeIndex/' + email);
+
+      ref.once('value').then(function (snapshot) {
+        var trees = snapshot.val() || [];
+        trees.push("/treeData/" + state.treeData.id + "/" + state.selectedTreeName);
+        ref.set(trees);
       });
     }
   },
@@ -97,7 +112,7 @@ const mutations = {
     state.treeData = null;
     firebase.database().ref('/treeData/' + profile.id + "/" + state.selectedTreeName).set(null);
   },
-  [types.SET_TREE](state, treeName){
+  [types.SET_TREE](state, treeName) {
     state.selectedTreeName = treeName;
     state.treeData = state.trees[treeName];
   }

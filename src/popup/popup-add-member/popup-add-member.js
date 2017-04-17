@@ -23,9 +23,12 @@ export default {
       this.$store.dispatch("addChild", member);
     },
     selectContact(contact) {
+      let self = this;
       this.$f7.closeModal();
-      this.$f7.popup(".popup-member-details");
       this.$store.dispatch("setSelectedNewMember", contact);
+      setTimeout(function () {
+        self.$f7.popup(".popup-member-details");
+      });
     },
     addMemberManually() {
       this.$store.dispatch("setSelectedNewMember", {});

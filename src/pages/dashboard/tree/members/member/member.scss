@@ -19,14 +19,14 @@
         height: 70px;
         width: 100%;
         background-size: cover;
-        background-position: center center;
+        background-position: top center;
         position: relative;
         z-index: 2;
         margin: auto;
         &.placeholder {
           height: auto;
-        width: 100%;
-        left:0px;
+          width: 100%;
+          left: 0px;
           position: absolute;
           top: 0px;
           z-index: 1;
@@ -173,20 +173,26 @@
       @extend %extend_1;
       z-index: 2;
       border-radius: 10px;
-      background: #1b1b1b;
+      background: black;
       box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
       //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
       transform: rotateY(0deg);
+      &.not-in-this-tree {
+        background: #1b1b1b
+      }
     }
     .back {
       width: 100%;
       height: 100%;
-      background: #1b1b1b;
+      background: black;
       @extend %extend_1;
       border-radius: 10px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
       //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
       transform: rotateY(180deg);
+      &.not-in-this-tree {
+        background: #1b1b1b
+      }
       .buttons {
         text-align: center;
         height: 100%;

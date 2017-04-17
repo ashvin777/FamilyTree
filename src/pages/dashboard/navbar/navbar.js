@@ -8,9 +8,13 @@ export default {
   },
   computed : mapGetters({
     profile : "getProfile",
-    trees: "getTrees"
+    trees: "getTrees",
+    treeNameFromStore : "getSelectedTreeName"
   }),
   watch: {
+    treeNameFromStore(){
+      this.treeName = this.$store.state.tree.selectedTreeName;
+    },
     treeName(){
       this.$store.dispatch("setTree", this.treeName);
     }

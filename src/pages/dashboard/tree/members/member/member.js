@@ -23,6 +23,9 @@ export default {
       var cur = new Date();
       var diff = cur - birthdate;
       return Math.floor(diff / 31536000000);
+    },
+    parent(){
+      return this.$parent.$parent.model || {};
     }
   },
   watch: {
