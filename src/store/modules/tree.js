@@ -16,17 +16,33 @@ const getters = {
 const actions = {
   loadTreeData({ commit, state }, profile) {
     commit(types.LOAD_TREE_DATA);
-    firebase.database().ref('/treeData/' + profile.id).once('value').then(function (snapshot) {
-      if (snapshot.val()) {
-        var treeData = snapshot.val();
-        commit(types.LOAD_TREE_DATA_SUCCESS, treeData);
-      } else {
-        commit(types.LOAD_TREE_DATA_FAILURE, profile);
-      }
+    // firebase.database().ref('/treeData/' + profile.id).once('value').then(function (snapshot) {
+    //   if (snapshot.val()) {
+    //     var treeData = snapshot.val();
+    //     commit(types.LOAD_TREE_DATA_SUCCESS, treeData);
+    //   } else {
+    //     commit(types.LOAD_TREE_DATA_FAILURE, profile);
+    //   }
+    // });
+
+    firebase.database().ref('/treeIndex/' + profile.id).once('value').then(function (treesRef) {
+      treesRef = treesRef.val();
+      var trees = {};
+      treesRef.forEach((treeRef, index) => {
+        firebase.database().ref(treeRef.treePath).once('value').then(function (treeData) {
+          treeData = treeData.val();
+          trees[treeRef.treeName] = treeData;
+          if (index == treesRef.length - 1) {
+            commit(types.LOAD_TREE_DATA_SUCCESS, trees);
+          }
+        });
+      });
     });
+
   },
   loadTreeRootProfile({ commit, state }, { profile, treeName }) {
     commit(types.LOAD_TREE_ROOT_PROFILE, { profile, treeName });
+    commit(types.ATTACH_TREE_TO_MEMBER, profile.email);
   },
   saveTreeDataInStorage({ commit, state }, profile) {
     commit(types.SAVE_TREE_DATA_ON_CHANGE, profile);
@@ -94,7 +110,13 @@ const mutations = {
 
       ref.once('value').then(function (snapshot) {
         var trees = snapshot.val() || [];
-        trees.push("/treeData/" + state.treeData.id + "/" + state.selectedTreeName);
+        var treePath = "/treeData/" + state.treeData.id + "/" + state.selectedTreeName;
+        if (trees.indexOf(treePath) == -1) {
+          trees.push({
+            treeName: state.selectedTreeName,
+            treePath: treePath
+          });
+        }
         ref.set(trees);
       });
     }
