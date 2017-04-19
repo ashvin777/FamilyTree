@@ -57,13 +57,30 @@
                 <div class="item-media"><i class="material-icons icon">info</i></div>
                 <div class="item-inner">
                   <div class="item-title label">Gender</div>
-                  <div class="item-input">
-                    <select @change="updateProperty('gender', $event.target.value)" required>
-                                <option></option>
-                                <option value="m">Male</option>
-                                <option value="f">Female</option>
-                              </select>
-                  </div>
+                  <ul>
+                    <li>
+                      <label class="label-radio item-content">
+                                <input type="radio" name="gender" value="m" @change="updateProperty('gender', $event.target.value)" required>
+                                <div class="item-media">
+                                  <i class="icon icon-form-radio"></i>
+                                </div>
+                                <div class="item-inner">
+                                  <div class="item-title">Male</div>
+                                </div>
+                              </label>
+                    </li>
+                    <li>
+                      <label class="label-radio item-content">
+                                <input type="radio" name="gender" value="f" @change="updateProperty('gender', $event.target.value)" required>
+                                <div class="item-media">
+                                  <i class="icon icon-form-radio color-pink"></i>
+                                </div>
+                                <div class="item-inner">
+                                  <div class="item-title">Female</div>
+                                </div>
+                              </label>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </li>
@@ -83,14 +100,52 @@
                 <div class="item-media"><i class="material-icons icon">link</i></div>
                 <div class="item-inner">
                   <div class="item-title label">Relation</div>
-                  <div class="item-input">
-                    <select v-model="relation" required>
-                                <option value="children">Children</option>
-                                <option value="sibling">Sibling</option>
-                                <option value="spouse">Spouse</option>
-                                <option value="parent">Parent</option>
-                              </select>
-                  </div>
+                  <ul>
+                    <li>
+                      <label class="label-radio item-content">
+                                <input type="radio" name="relation" value="children" v-model="relation" required>
+                                <div class="item-media">
+                                  <i class="icon icon-form-radio"></i>
+                                </div>
+                                <div class="item-inner">
+                                  <div class="item-title">Children</div>
+                                </div>
+                              </label>
+                    </li>
+                    <li>
+                      <label class="label-radio item-content">
+                                <input type="radio" name="relation" value="sibling" v-model="relation" required>
+                                <div class="item-media">
+                                  <i class="icon icon-form-radio"></i>
+                                </div>
+                                <div class="item-inner">
+                                  <div class="item-title">Sibling</div>
+                                </div>
+                              </label>
+                    </li>
+                    <li>
+                      <label class="label-radio item-content">
+                                <input type="radio" name="relation" value="spouse" v-model="relation" required>
+                                <div class="item-media">
+                                  <i class="icon icon-form-radio"></i>
+                                </div>
+                                <div class="item-inner">
+                                  <div class="item-title">Spouse</div>
+                                </div>
+                              </label>
+                    </li>
+                    <li>
+                      <label class="label-radio item-content">
+                                <input type="radio" name="relation" value="parent" v-model="relation" required>
+                                <div class="item-media">
+                                  <i class="icon icon-form-radio"></i>
+                                </div>
+                                <div class="item-inner">
+                                  <div class="item-title">Parent</div>
+                                </div>
+                              </label>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </li>

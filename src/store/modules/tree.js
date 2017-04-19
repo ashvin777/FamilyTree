@@ -67,15 +67,18 @@ const mutations = {
     state.trees = null;
   },
   [types.LOAD_TREE_DATA_SUCCESS](state, treeData) {
-    state.trees = treeData;
+    // state.trees = treeData;
+    Vue.set(state, "trees", treeData);
     var treeId = Object.keys(treeData)[0];
     if (!state.selectedTreeName) {
       state.selectedTreeName = treeId;
     }
     if (!treeData[treeId].children) {
-      treeData[treeId].children = [];
+      Vue.set(treeData[treeId], 'children', []);
+      // treeData[treeId].children = [];
     }
-    state.treeData = treeData[treeId];
+    // state.treeData = treeData[treeId];
+    Vue.set(state, "treeData", treeData[treeId]);
   },
   [types.LOAD_TREE_DATA_FAILURE](state, profile) {
 
@@ -136,7 +139,8 @@ const mutations = {
   },
   [types.SET_TREE](state, treeName) {
     state.selectedTreeName = treeName;
-    state.treeData = state.trees[treeName];
+    // state.treeData = state.trees[treeName];
+    Vue.set(state, 'treeData', state.trees[treeName]);
   }
 }
 

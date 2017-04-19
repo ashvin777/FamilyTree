@@ -33,6 +33,28 @@
       height: 400px;
       overflow: auto;
     }
+    .item-content {
+      ul {
+        width: 100%;
+        padding-left: 0px;
+        li {
+          label.item-content {
+            padding-left: 0px;
+            .icon-form-radio {
+              border-color: $NavbarBg;
+              &:after {
+                background-color: $NavbarBg;
+              }
+            }
+            .item-inner {
+              &:after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
   }
   .toolbar {
     width: 100%;
