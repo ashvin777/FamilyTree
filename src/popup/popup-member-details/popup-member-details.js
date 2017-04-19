@@ -6,18 +6,17 @@ export default {
       relation: null
     }
   },
-  computed: mapGetters({
-    "selectedNewMember": "getSelectedNewMember",
-    "selectedMember": "getSelectedMember"
-  }),
+  computed: {
+    selectedNewMember() {
+      this.$store.dispatch("extendSelectedNewMember");
+      return Object.assign({}, this.$store.state.member.selectedNewMember);
+    }
+  },
   methods: {
-    updateProperty(prop, value) {
-      this.$store.dispatch("updateMemberProperty", { prop, value });
-    },
     addRelative(event) {
       event.preventDefault();
       this.$store.dispatch("extendSelectedNewMember");
-      this.$store.dispatch("attachTreeToMember", this.selectedNewMember.email );
+      this.$store.dispatch("attachTreeToMember", this.selectedNewMember.email);
       if (this.selectedNewMember.id) {
         this.updateMember();
       } else {

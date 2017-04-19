@@ -25,7 +25,7 @@
                 <div class="item-inner">
                   <div class="item-title label">Name</div>
                   <div class="item-input">
-                    <input type="text" placeholder="Your name" :value="selectedNewMember.name" @keyup="updateProperty('name', $event.target.value)" required>
+                    <input type="text" placeholder="Your name" v-model="selectedNewMember.name" required>
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                 <div class="item-inner">
                   <div class="item-title label">E-mail</div>
                   <div class="item-input">
-                    <input type="email" placeholder="E-mail" @keyup="updateProperty('email', $event.target.value)" :value="selectedNewMember.email"></input>
+                    <input type="email" placeholder="E-mail" v-model="selectedNewMember.email"></input>
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                 <div class="item-inner">
                   <div class="item-title label">Phone</div>
                   <div class="item-input">
-                    <input type="tel" placeholder="Phone" @keyup="updateProperty('phoneNumber', $event.target.value)" :value="selectedNewMember.phoneNumber">
+                    <input type="tel" placeholder="Phone" v-model="selectedNewMember.phoneNumber">
                   </div>
                 </div>
               </div>
@@ -60,7 +60,7 @@
                   <ul>
                     <li>
                       <label class="label-radio item-content">
-                                <input type="radio" name="gender" value="m" @change="updateProperty('gender', $event.target.value)" required>
+                                <input type="radio" name="gender" value="m" v-model="selectedNewMember.gender" required>
                                 <div class="item-media">
                                   <i class="icon icon-form-radio"></i>
                                 </div>
@@ -71,7 +71,7 @@
                     </li>
                     <li>
                       <label class="label-radio item-content">
-                                <input type="radio" name="gender" value="f" @change="updateProperty('gender', $event.target.value)" required>
+                                <input type="radio" name="gender" value="f" v-model="selectedNewMember.gender"  required>
                                 <div class="item-media">
                                   <i class="icon icon-form-radio color-pink"></i>
                                 </div>
@@ -90,7 +90,7 @@
                 <div class="item-inner">
                   <div class="item-title label">Birth date</div>
                   <div class="item-input">
-                    <input type="date" placeholder="Birth day" @change="updateProperty('dob', $event.target.value)">
+                    <input type="date" placeholder="Birth day" v-model="selectedNewMember.dob" >
                   </div>
                 </div>
               </div>

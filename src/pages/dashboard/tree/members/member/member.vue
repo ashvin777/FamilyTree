@@ -1,16 +1,22 @@
 <template>
   <f7-card class="flip-container">
+    <div class="other-tree-reference" v-if="member.treesRef" v-show="member.treesRef.length > 0">
+      <i class="icon material-icons">device_hub</i>
+      <div class="tree-ref">
+        <div v-for="ref in member.treesRef">{{ref.treeName}}</div>
+      </div>
+    </div>
     <div class="flipper">
       <div class="front" :class="{ 'not-in-this-tree': !member.root && (member.parentId != parent.id)}">
         <div class="image-container">
           <div class="image" v-if="!member.root" :style=" { backgroundImage: 'url(\''+member.image + '?access_token=' + token +'\')' }"></div>
           <div class="image" v-if="member.root" :style=" { backgroundImage: 'url(\''+member.image + '&sz=100' +'\')' }"></div>
-          
+  
           <img v-if="member.gender != 'f' && !age" class="image placeholder" src="../../../../../css/img/man.png">
           <img v-if="member.gender != 'f' && age <= 12" class="image placeholder" src="../../../../../css/img/boy.png">
           <img v-if="member.gender != 'f' && age > 12 && age <= 50" class="image placeholder" src="../../../../../css/img/man.png">
           <img v-if="member.gender != 'f' && age > 50" class="image placeholder" src="../../../../../css/img/old-man.png">
-
+  
           <img v-if="member.gender == 'f' && !age" class="image placeholder" src="../../../../../css/img/woman.png">
           <img v-if="member.gender == 'f' && age <= 12" class="image placeholder" src="../../../../../css/img/girl.png">
           <img v-if="member.gender == 'f' && age > 12 && age <= 50" class="image placeholder" src="../../../../../css/img/woman.png">

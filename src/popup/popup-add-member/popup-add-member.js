@@ -25,7 +25,7 @@ export default {
     selectContact(contact) {
       let self = this;
       this.$f7.closeModal();
-      this.$store.dispatch("setSelectedNewMember", contact);
+      this.$store.dispatch("setSelectedNewMember", Object.assign({}, contact));
       setTimeout(function () {
         self.$f7.popup(".popup-member-details");
       });

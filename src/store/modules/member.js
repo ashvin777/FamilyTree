@@ -59,19 +59,19 @@ const mutations = {
   [types.SET_SELECTED_NEW_MEMBER](state, member) {
     state.selectedNewMember = member;
   },
-  [types.EXTEND_SELECTED_NEW_MEMBER](state){
-
-    Vue.set(state.selectedNewMember, "name", state.selectedNewMember.name || '');
-    Vue.set(state.selectedNewMember, "email", state.selectedNewMember.email || '');
-    Vue.set(state.selectedNewMember, "gender", state.selectedNewMember.gender || '');
-    Vue.set(state.selectedNewMember, "image", state.selectedNewMember.image || '');
-    Vue.set(state.selectedNewMember, "dob", state.selectedNewMember.dob || '');
-    Vue.set(state.selectedNewMember, "phoneNumber", state.selectedNewMember.phoneNumber || '');
-    Vue.set(state.selectedNewMember, "spouseId", state.selectedNewMember.spouseId || '');
-    Vue.set(state.selectedNewMember, "googleId", state.selectedNewMember.googleId || '');
-    Vue.set(state.selectedNewMember, "id", state.selectedNewMember.id || '');
-    Vue.set(state.selectedNewMember, "parentId", state.selectedNewMember.parentId || '');
-
+  [types.EXTEND_SELECTED_NEW_MEMBER](state) {
+    if (state.selectedNewMember) {
+      Vue.set(state.selectedNewMember, "name", state.selectedNewMember.name || '');
+      Vue.set(state.selectedNewMember, "email", state.selectedNewMember.email || '');
+      Vue.set(state.selectedNewMember, "gender", state.selectedNewMember.gender || '');
+      Vue.set(state.selectedNewMember, "image", state.selectedNewMember.image || '');
+      Vue.set(state.selectedNewMember, "dob", state.selectedNewMember.dob || '');
+      Vue.set(state.selectedNewMember, "phoneNumber", state.selectedNewMember.phoneNumber || '');
+      Vue.set(state.selectedNewMember, "spouseId", state.selectedNewMember.spouseId || '');
+      Vue.set(state.selectedNewMember, "googleId", state.selectedNewMember.googleId || '');
+      Vue.set(state.selectedNewMember, "id", state.selectedNewMember.id || '');
+      Vue.set(state.selectedNewMember, "parentId", state.selectedNewMember.parentId || '');
+    }
   },
   [types.ADD_CHILDREN](state, member) {
     var obj = {};
@@ -82,7 +82,7 @@ const mutations = {
     member.parentId = state.selectedNode.id;
     obj.partners.push(member);
     if (!state.selectedNode.children) {
-      Vue.set(state.selectedNode, "children" , []);
+      Vue.set(state.selectedNode, "children", []);
     }
     state.selectedNode.children.push(obj);
     Vue.set(state, 'selectedNode', state.selectedNode);
@@ -98,10 +98,10 @@ const mutations = {
     obj.children = [];
     obj.id = new Date().getTime();
     member.id = new Date().getTime();
-    member.parentId = state.selectedParent.id;
+    member.parentId = state.selectedParent ? state.selectedParent.id : null;
     obj.partners.push(member);
     if (!state.selectedNode.children) {
-      Vue.set(state.selectedNode, "children" , []);
+      Vue.set(state.selectedNode, "children", []);
     }
     state.selectedParent.children.push(obj);
   },
@@ -109,7 +109,9 @@ const mutations = {
     Vue.set(state.selectedNewMember, obj.prop, obj.value);
   },
   [types.UPDATE_EXISTING_MEMBER](state, member) {
-    Vue.set(state, "selectedMember", member);
+    Object.keys(member).forEach(function (key) {
+      Vue.set(state.selectedNewMember, key, member[key]);
+    });
   },
   [types.DELETE_MEMBER](state, member) {
     if (state.selectedParent) {

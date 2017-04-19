@@ -16,29 +16,20 @@ const getters = {
 const actions = {
   loadTreeData({ commit, state }, profile) {
     commit(types.LOAD_TREE_DATA);
-    // firebase.database().ref('/treeData/' + profile.id).once('value').then(function (snapshot) {
-    //   if (snapshot.val()) {
-    //     var treeData = snapshot.val();
-    //     commit(types.LOAD_TREE_DATA_SUCCESS, treeData);
-    //   } else {
-    //     commit(types.LOAD_TREE_DATA_FAILURE, profile);
-    //   }
-    // });
-
     firebase.database().ref('/treeIndex/' + profile.id).once('value').then(function (treesRef) {
       treesRef = treesRef.val();
       var trees = {};
+      if (!treesRef) {
+        commit(types.LOAD_TREE_DATA_FAILURE);
+        return;
+      }
       treesRef.forEach((treeRef, index) => {
-        firebase.database().ref(treeRef.treePath).once('value').then(function (treeData) {
+        firebase.database().ref(treeRef.treePath).on('value', function (treeData) {
           treeData = treeData.val();
-          trees[treeRef.treeName] = treeData;
-          if (index == treesRef.length - 1) {
-            commit(types.LOAD_TREE_DATA_SUCCESS, trees);
-          }
+          commit(types.UPDATE_TREE_SYNC, { treeData, treeRef });
         });
       });
     });
-
   },
   loadTreeRootProfile({ commit, state }, { profile, treeName }) {
     commit(types.LOAD_TREE_ROOT_PROFILE, { profile, treeName });
@@ -58,30 +49,54 @@ const actions = {
   },
   setTree({ commit, state }, treeName) {
     commit(types.SET_TREE, treeName);
+  },
+  loadMemberTreesReferences({ commit, state }, member) {
+    if (member.email) {
+      var email = member.email.replace(/\./g, "");
+      firebase.database().ref('/treeIndex/' + email).once('value').then(function (treesRef) {
+        treesRef = treesRef.val();
+        commit(types.LOAD_MEMBER_TREES_REFERENCE, { member, treesRef });
+      });
+    }
   }
 }
 
 const mutations = {
   [types.LOAD_TREE_DATA](state, treeName) {
-    state.treeData = null;
-    state.trees = null;
+    // state.treeData = null;
+    // state.trees = null;
   },
   [types.LOAD_TREE_DATA_SUCCESS](state, treeData) {
-    // state.trees = treeData;
-    Vue.set(state, "trees", treeData);
+    state.trees = treeData;
+    // Vue.set(state, "trees", treeData);
     var treeId = Object.keys(treeData)[0];
     if (!state.selectedTreeName) {
       state.selectedTreeName = treeId;
     }
-    if (!treeData[treeId].children) {
+    if (treeData[treeId] && !treeData[treeId].children) {
       Vue.set(treeData[treeId], 'children', []);
-      // treeData[treeId].children = [];
     }
-    // state.treeData = treeData[treeId];
-    Vue.set(state, "treeData", treeData[treeId]);
+    // Vue.set(state, "treeData", treeData[treeId]);
   },
   [types.LOAD_TREE_DATA_FAILURE](state, profile) {
 
+  },
+  [types.UPDATE_TREE_SYNC](state, { treeData, treeRef }) {
+    if (!treeData) {
+      return;
+    }
+    var treeId = treeRef.treeName;
+    if (!state.trees) {
+      state.trees = {};
+    }
+    if (!state.selectedTreeName) {
+      state.selectedTreeName = treeId;
+    }
+    if (treeData[treeId] && !treeData[treeId].children) {
+      Vue.set(treeData[treeId], 'children', []);
+    }
+    state.treeData = treeData;
+    Vue.set(state.trees, treeRef.treeName, treeData);
   },
   [types.LOAD_TREE_ROOT_PROFILE](state, { profile, treeName }) {
     state.selectedTreeName = treeName;
@@ -139,8 +154,22 @@ const mutations = {
   },
   [types.SET_TREE](state, treeName) {
     state.selectedTreeName = treeName;
-    // state.treeData = state.trees[treeName];
     Vue.set(state, 'treeData', state.trees[treeName]);
+  },
+  [types.LOAD_MEMBER_TREES_REFERENCE](state, { member, treesRef }) {
+    if (treesRef) {
+      Vue.set(member, 'treesRef', []);
+      treesRef.forEach((treeRef, index) => {
+        if (state.selectedTreeName != treeRef.treeName) {
+          if (!member.treesRef) {
+            Vue.set(member, 'treesRef', []);
+            member.treesRef.push(treeRef);
+          } else {
+            member.treesRef.push(treeRef);
+          }
+        }
+      });
+    }
   }
 }
 

@@ -39,6 +39,9 @@ export default {
       deep: true
     }
   },
+  mounted(){
+    this.$store.dispatch('loadMemberTreesReferences', this.member);
+  },
   methods: {
     openMemberPopover(member) {
       this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
