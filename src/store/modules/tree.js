@@ -50,6 +50,12 @@ const actions = {
   setTree({ commit, state }, treeName) {
     commit(types.SET_TREE, treeName);
   },
+  openTree({ commit, state }, ref) {
+    firebase.database().ref(ref.treePath).once('value').then(function (treeData) {
+      var treeData = treeData.val();
+      commit(types.OPEN_TREE, { treeData, ref });
+    });
+  },
   loadMemberTreesReferences({ commit, state }, member) {
     if (member.email) {
       var email = member.email.replace(/\./g, "");
@@ -155,6 +161,16 @@ const mutations = {
   [types.SET_TREE](state, treeName) {
     state.selectedTreeName = treeName;
     Vue.set(state, 'treeData', state.trees[treeName]);
+  },
+  [types.OPEN_TREE](state, { treeData, ref }) {
+    state.selectedTreeName = ref.treeName;
+
+    if (treeData && !treeData.children) {
+      Vue.set(treeData, 'children', []);
+    }
+    
+    state.treeData = treeData;
+    Vue.set(state.trees, state.selectedTreeName, treeData);
   },
   [types.LOAD_MEMBER_TREES_REFERENCE](state, { member, treesRef }) {
     if (treesRef) {

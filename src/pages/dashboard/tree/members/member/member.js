@@ -71,6 +71,9 @@ export default {
     addMember() {
       this.$store.dispatch("setSelectedMembersParent", this.$parent.$parent.model || null);
       this.$store.dispatch("setSelectedMember", { member: this.member, model: this.model });
+    },
+    openTree(ref){
+      this.$store.dispatch("openTree", ref);
     }
   }
 }

@@ -1,9 +1,12 @@
 <template>
   <f7-card class="flip-container">
-    <div class="other-tree-reference" v-if="member.treesRef" v-show="member.treesRef.length > 0">
+    <div class="back other-tree-reference" v-if="member.treesRef" v-show="member.treesRef.length > 0">
       <i class="icon material-icons">device_hub</i>
       <div class="tree-ref">
-        <div v-for="ref in member.treesRef">{{ref.treeName}}</div>
+        <div v-for="ref in member.treesRef" @click="openTree(ref)">
+          <i class="icon material-icons">device_hub</i>
+          <div class="tree-name">{{ref.treeName}}</div>
+        </div>
       </div>
     </div>
     <div class="flipper">
