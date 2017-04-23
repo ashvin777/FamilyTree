@@ -153,6 +153,7 @@ const mutations = {
     };
     member.id = new Date().getTime();
     state.treeData.partners.push(member);
+    Vue.set(state.trees , state.selectedTreeName, state.treeData);
   },
   [types.DELETE_TREE](state, profile) {
     state.treeData = null;
